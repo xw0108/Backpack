@@ -1,6 +1,8 @@
 {
-  "name": "Ecology Backpacks",
-  "description": "K-12 Camp Counselor Wildlife Monitoring SaaS for AI-assisted equipment deployment and site planning.",
+  "name": "Backpack IoT Sentry",
+  "description": "物联网与公民科学开源项目的野外生态监测仪表盘系统。提供营地门户、LoRa控制中心、数字孪生模拟器与云端研析站。",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
