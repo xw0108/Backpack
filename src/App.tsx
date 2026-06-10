@@ -10,25 +10,65 @@ export type Page = 'home' | 'control' | 'simulator' | 'insights';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [currentUser, setCurrentUser] = useState<UserSession | null>({
-    username: 'advisor_spruce',
-    backpacks: ['BP-2026-X8', 'BP-2026-M4']
+  
+  const [currentUser, setCurrentUser] = useState<UserSession | null>(() => {
+    const saved = localStorage.getItem('backpack_user');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse saved user', e);
+      }
+    }
+    return {
+      username: 'advisor_spruce',
+      backpacks: ['BP-2026-X8', 'BP-2026-M4']
+    };
   });
 
   // Global register of backpack serial numbers to their active virtual sensors
-  const [backpackDevices, setBackpackDevices] = useState<Record<string, Device[]>>({
-    'BP-2026-X8': [
-      { id: 'hp-1', type: 'honeypot', gridX: 50, gridY: 50, rotation: 0, battery: 100, status: 'online', name: 'Altar Bait' },
-      { id: 'cam-1', type: 'camera', gridX: 42, gridY: 42, rotation: 135, battery: 84, status: 'online', name: 'Creek-Facing Cam' },
-      { id: 'cam-2', type: 'camera', gridX: 58, gridY: 58, rotation: 315, battery: 92, status: 'online', name: 'Glade-Facing Cam' },
-      { id: 'aud-1', type: 'audio', gridX: 50, gridY: 30, rotation: 180, battery: 78, status: 'online', name: 'Birch Grove Mic' }
-    ],
-    'BP-2026-M4': [
-      { id: 'hp-2', type: 'honeypot', gridX: 50, gridY: 50, rotation: 0, battery: 100, status: 'offline', name: 'Marsh Target' }
-    ]
+  const [backpackDevices, setBackpackDevices] = useState<Record<string, Device[]>>(() => {
+    const saved = localStorage.getItem('backpack_devices');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse saved devices', e);
+      }
+    }
+    return {
+      'BP-2026-X8': [
+        { id: 'hp-1', type: 'honeypot', gridX: 50, gridY: 50, rotation: 0, battery: 100, status: 'online', name: 'Altar Bait' },
+        { id: 'cam-1', type: 'camera', gridX: 42, gridY: 42, rotation: 135, battery: 84, status: 'online', name: 'Creek-Facing Cam' },
+        { id: 'cam-2', type: 'camera', gridX: 58, gridY: 58, rotation: 315, battery: 92, status: 'online', name: 'Glade-Facing Cam' },
+        { id: 'aud-1', type: 'audio', gridX: 50, gridY: 30, rotation: 180, battery: 78, status: 'online', name: 'Birch Grove Mic' }
+      ],
+      'BP-2026-M4': [
+        { id: 'hp-2', type: 'honeypot', gridX: 50, gridY: 50, rotation: 0, battery: 100, status: 'offline', name: 'Marsh Target' }
+      ]
+    };
   });
 
-  const [selectedBackpack, setSelectedBackpack] = useState<string>('BP-2026-X8');
+  const [selectedBackpack, setSelectedBackpack] = useState<string>(() => {
+    return localStorage.getItem('backpack_selected') || 'BP-2026-X8';
+  });
+
+  // Sync to localStorage
+  React.useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('backpack_user', JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem('backpack_user');
+    }
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    localStorage.setItem('backpack_devices', JSON.stringify(backpackDevices));
+  }, [backpackDevices]);
+
+  React.useEffect(() => {
+    localStorage.setItem('backpack_selected', selectedBackpack);
+  }, [selectedBackpack]);
 
   // Simulated Species Verification (Citizen Science Deck)
   const [photoCaptures, setPhotoCaptures] = useState<PhotoCapture[]>([
@@ -82,7 +122,7 @@ export default function App() {
   const [simulatedScore, setSimulatedScore] = useState<number>(0);
 
   // Global user management simulated helpers
-  const handleLogin = (username: string, serialInput?: string) => {
+  const handleLogin = (username: string, serialInput?: string, initDevices?: Device[]) => {
     if (serialInput) {
       // Direct serial code entry bypass
       const serial = serialInput.trim().toUpperCase();
@@ -90,12 +130,10 @@ export default function App() {
         username: `Guest_${serial}`,
         backpacks: [serial]
       });
-      if (!backpackDevices[serial]) {
-        setBackpackDevices(prev => ({
-          ...prev,
-          [serial]: []
-        }));
-      }
+      setBackpackDevices(prev => ({
+        ...prev,
+        [serial]: initDevices || prev[serial] || []
+      }));
       setSelectedBackpack(serial);
     } else {
       // standard login
@@ -108,11 +146,11 @@ export default function App() {
     setCurrentPage('control');
   };
 
-  const handleRegisterBackpack = (serial: string) => {
+  const handleRegisterBackpack = (serial: string, parsedDevices?: Device[]) => {
     const rawSerial = serial.trim().toUpperCase() || `BP-2026-NEW`;
     setBackpackDevices(prev => ({
       ...prev,
-      [rawSerial]: prev[rawSerial] || []
+      [rawSerial]: parsedDevices || prev[rawSerial] || []
     }));
 
     if (currentUser) {
@@ -166,6 +204,7 @@ export default function App() {
             selectedBackpack={selectedBackpack}
             currentUser={currentUser}
             setSelectedBackpack={setSelectedBackpack}
+            onRegister={handleRegisterBackpack}
           />
         );
       case 'simulator':

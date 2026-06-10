@@ -16,7 +16,8 @@ import {
   Sparkles,
   RefreshCw,
   Plus,
-  Tv
+  Tv,
+  Upload
 } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { Device, DeviceType, UserSession } from '../types';
@@ -27,6 +28,7 @@ interface ControlCenterProps {
   selectedBackpack: string;
   currentUser: UserSession | null;
   setSelectedBackpack: (serial: string) => void;
+  onRegister?: (serial: string, parsedDevices?: Device[]) => void;
 }
 
 export default function ControlCenter({ 
@@ -34,7 +36,8 @@ export default function ControlCenter({
   setDevices, 
   selectedBackpack, 
   currentUser,
-  setSelectedBackpack 
+  setSelectedBackpack,
+  onRegister
 }: ControlCenterProps) {
   const [selectedDeviceId, setSelectedDeviceId] = useState<string | null>(null);
   const [syncingState, setSyncingState] = useState<'idle' | 'syncing' | 'completed'>('idle');
@@ -209,18 +212,81 @@ export default function ControlCenter({
         <div className="p-5 border-b border-stone-100 bg-stone-50">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest leading-none">Active Hardware Serial</span>
-            <span className="text-[9px] bg-emerald-900 text-white px-2 py-0.5 rounded-full font-black tracking-wider uppercase">LoRa Node</span>
+            <span className="text-[9px] bg-emerald-900 text-white px-2 py-0.5 rounded-full font-black tracking-wider uppercase font-mono">LoRa Node</span>
           </div>
           
-          <select 
-            value={selectedBackpack}
-            onChange={(e) => setSelectedBackpack(e.target.value)}
-            className="w-full px-4 py-2.5 bg-white border border-stone-200 rounded-xl font-mono text-sm text-stone-900 focus:outline-none focus:border-emerald-700"
-          >
-            {currentUser?.backpacks.map((serial) => (
-              <option key={serial} value={serial}>{serial} - Workspace Kit</option>
-            ))}
-          </select>
+          <div className="flex gap-2">
+            <select 
+              value={selectedBackpack}
+              onChange={(e) => setSelectedBackpack(e.target.value)}
+              className="flex-grow px-3 py-2.5 bg-white border border-stone-200 rounded-xl font-mono text-xs text-stone-900 focus:outline-none focus:border-emerald-700 font-bold min-w-0"
+            >
+              {currentUser?.backpacks.map((serial) => (
+                <option key={serial} value={serial}>{serial} - Workspace Kit</option>
+              ))}
+            </select>
+            
+            {onRegister && (
+              <>
+                <input 
+                  type="file"
+                  id="cc-add-backpack-file"
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (!files || files.length === 0) return;
+                    const file = files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      try {
+                        const data = JSON.parse(event.target?.result as string);
+                        const deviceIdRaw = data.deviceId || data.id || `BP-${Math.floor(1000 + Math.random() * 9000)}`;
+                        const deviceName = data.deviceName || data.name || 'Imported Sentry Kit';
+                        
+                        const hashStr = `${deviceIdRaw}-${deviceName}`;
+                        let hash = 0;
+                        for (let i = 0; i < hashStr.length; i++) {
+                          hash = (hash << 5) - hash + hashStr.charCodeAt(i);
+                          hash |= 0;
+                        }
+                        const serialCode = `BP-${Math.abs(hash).toString(36).toUpperCase().substring(0, 4)}-${deviceIdRaw.slice(-4).toUpperCase()}`;
+                        
+                        const incomingSensors = data.sensors || data.devices || [];
+                        const parsedDevices: Device[] = incomingSensors.map((s: any, idx: number) => {
+                          const allowedTypes = ['honeypot', 'camera', 'audio'];
+                          const type = allowedTypes.includes(s.type) ? s.type : 'camera';
+                          return {
+                            id: s.id || `${type}-${Date.now()}-${idx}`,
+                            type: type,
+                            gridX: s.gridX !== undefined ? Number(s.gridX) : (35 + idx * 15),
+                            gridY: s.gridY !== undefined ? Number(s.gridY) : (35 + idx * 10),
+                            rotation: s.rotation !== undefined ? Number(s.rotation) : (type === 'camera' ? 180 : 0),
+                            battery: s.battery !== undefined ? Number(s.battery) : 100,
+                            status: 'online' as const,
+                            name: s.name || `${type.charAt(0).toUpperCase() + type.slice(1)} Unit`
+                          };
+                        });
+                        
+                        onRegister(serialCode, parsedDevices);
+                      } catch (err: any) {
+                        alert(`JSON upload failed: ${err?.message || 'Config was invalid.'}`);
+                      }
+                    };
+                    reader.readAsText(file);
+                  }}
+                  accept=".json"
+                  className="hidden"
+                />
+                <button
+                  onClick={() => document.getElementById('cc-add-backpack-file')?.click()}
+                  className="px-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-100 rounded-xl text-[10px] font-black tracking-tight transition-all flex items-center justify-center gap-1 shrink-0 shadow-sm"
+                  title="Upload JSON configuration to add another backpack layout"
+                >
+                  <Upload size={12} className="text-emerald-700 shrink-0" />
+                  + Add Kit
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Dynamic scroll portion */}
