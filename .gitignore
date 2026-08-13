@@ -6,3 +6,15 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Python backend
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Cloned by install.sh — upstream gesture project + pretrained ONNX models
+/high_school_io_2025/
+
+# Created by SoftwarePilot/olympe at runtime
+server/AnafiMedia/

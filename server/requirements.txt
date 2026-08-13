@@ -1,2 +1,27 @@
+# Backend for the gesture → drone bridge.  Target: Linux x86_64, Python 3.10
+# (Ubuntu 22.04's system python — the same interpreter generation parrot-olympe
+# 7.5.0 is built and tested against).
+#
+# numpy is held below 2.0 on purpose: dynamic_gestures depends on filterpy
+# 1.4.5, which uses numpy APIs removed in 2.x, and onnxruntime 1.16 is built
+# against the 1.x ABI.  The gesture project's own requirements.txt asks for
+# numpy 2.2.6, which cannot satisfy either — do not "upgrade" this.
+numpy>=1.24,<2
+scipy>=1.10,<2
+filterpy==1.4.5
+
+# The ONNX models ship from the dynamic_gestures era (runtime 1.13) but newer
+# runtimes read old opsets fine, and 1.13 has no cp310/cp311 wheels at all.
+onnxruntime>=1.16,<1.20
+
+# headless: nothing in the web path calls cv2.imshow, and the plain build drags
+# in libGL/libSM which a container or a bare Linux box may not have.
+opencv-python-headless>=4.8,<5
+
 fastapi>=0.111.0
 uvicorn[standard]>=0.29.0
+
+# For DETECTOR=yolo only — install separately, it pulls torch:
+#   pip install ultralytics
+#
+# For RUN_MODE=live only — see requirements-live.txt.

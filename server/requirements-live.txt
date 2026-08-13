@@ -1,0 +1,10 @@
+# Only needed for RUN_MODE=live.  Install on top of requirements.txt:
+#   pip install -r server/requirements.txt -r server/requirements-live.txt
+#
+# SoftwarePilot pulls parrot-olympe, which is Linux x86_64 only (manylinux_2_27,
+# so glibc >= 2.27 — Ubuntu 22.04 is fine).  There is no Windows or macOS build;
+# this is why the deployment target is Linux.
+#
+# It also pulls PyOpenGL, PySDL2 and docker, which olympe only needs for its
+# video-streaming and simulator features.  They install cleanly headless.
+SoftwarePilot==1.2.6

@@ -1,233 +1,403 @@
 """
 FastAPI backend — gesture control bridge.
 
-POST /api/start  launch gesture_worker subprocess
-POST /api/stop   kill it
-GET  /api/status current state
-WS   /api/ws     real-time gesture stream
+One process, one detector.  The desktop script's logic lives in gesture_engine
+(decisions) and drone (execution); this module only moves frames in and events
+out.  Run it with the gesture-control virtualenv's Python:
+
+    RUN_MODE=live ./server/run.sh
+
+Frame sources
+  CAMERA_SOURCE=browser  the page captures with getUserMedia and pushes JPEG
+                         frames over WS /api/ws/frames.  Works on WSL2, where
+                         /dev/video* does not exist.
+  CAMERA_SOURCE=server   this process opens the V4L2 device and serves an
+                         annotated MJPEG stream at /api/video_feed.
+
+REST
+  GET  /api/config              static config snapshot
+  GET  /api/actions             actions.json rendered for the UI
+  GET  /api/status              session + drone + engine state
+  POST /api/start               load models, reset counters, begin a session
+  POST /api/stop                end the session
+  POST /api/drone/connect       connect / disconnect (live mode)
+  POST /api/drone/disconnect
+  POST /api/drone/arm           arm / disarm the flight-command gate
+  POST /api/drone/disarm
+  POST /api/drone/takeoff       primitives actions.json does not cover
+  POST /api/drone/land
+  POST /api/drone/rth
+  POST /api/drone/emergency     cancel current move, land, disarm
+
+WS
+  /api/ws                       event stream (detections, executions, state)
+  /api/ws/frames                binary JPEG upload, browser capture mode
 """
 
 import asyncio
 import json
-import subprocess
 import sys
-import threading
 import traceback
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Optional, Set
 
+import cv2
+import numpy as np
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-_THIS_DIR      = Path(__file__).parent
-_WORKER_SCRIPT = _THIS_DIR / "gesture_worker.py"
-_GESTURE_ROOT  = Path(r"C:\Users\wangx\OneDrive\Desktop\backpack\Gesture control\high_school_io_2025")
-_VENV_PYTHON   = _GESTURE_ROOT / ".venv" / "Scripts" / "python.exe"
+import config
+from camera_source import ServerCamera
+from drone import DroneController
+from gesture_engine import GestureEngine
 
-app = FastAPI(title="Backpack Gesture API", version="0.3.0")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+app = FastAPI(title="Backpack Gesture → Drone API", version="1.0.0")
+app.add_middleware(
+    CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
+)
 
 # ── Global state ─────────────────────────────────────────────────────────────
-_ws_clients:     set[WebSocket]             = set()
-_worker_proc:    Optional[subprocess.Popen] = None
-_reader_thread:  Optional[threading.Thread] = None
-_stderr_thread:  Optional[threading.Thread] = None
-_detector_ready: bool                       = False
-_stop_event:     threading.Event            = threading.Event()
-_event_loop:     Optional[asyncio.AbstractEventLoop] = None
+_drone = DroneController()
+_engine = GestureEngine(_drone)
+_ws_clients: Set[WebSocket] = set()
+_event_loop: Optional[asyncio.AbstractEventLoop] = None
+
+# Inference is CPU-bound and stateful (the tracker needs ordered frames), so it
+# runs on exactly one thread and never concurrently with itself.
+_inference_pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="inference")
+_load_pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="modelload")
+# The panic button gets its own thread so it can never sit in _load_pool's queue
+# behind a takeoff or a landing that is still running.
+_emergency_pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="emergency")
+
+_session_state: str = "stopped"  # stopped | starting | ready | error
+_session_error: Optional[str] = None
+_server_camera: Optional[ServerCamera] = None
 
 
-# ── WebSocket broadcaster ────────────────────────────────────────────────────
-async def _broadcast(payload: dict) -> None:
-    global _ws_clients
+# ── Broadcasting ─────────────────────────────────────────────────────────────
+async def _broadcast(payload: Dict[str, Any]) -> None:
     if not _ws_clients:
         return
-    msg = json.dumps(payload)
-    dead: set[WebSocket] = set()
+    message = json.dumps(payload)
+    dead: Set[WebSocket] = set()
     for ws in list(_ws_clients):
         try:
-            await ws.send_text(msg)
+            await ws.send_text(message)
         except Exception:
             dead.add(ws)
-    _ws_clients -= dead
+    _ws_clients.difference_update(dead)
 
 
-# ── Frame handler (runs on the event loop, scheduled by reader thread) ───────
-async def _handle_frame(data: dict) -> None:
-    global _detector_ready
-    if data.get("status") == "ready":
-        _detector_ready = True
-        await _broadcast({"status": "detector_ready"})
-    elif "error" in data:
-        await _broadcast({"status": "detector_error", "message": data["error"]})
-    elif data.get("_stopped"):
-        await _broadcast({"status": "detector_stopped"})
-    elif data.get("label"):          # gesture frame — only forward real gestures
-        await _broadcast(data)
-    # else: unknown payload, silently drop
+def _broadcast_threadsafe(payload: Dict[str, Any]) -> None:
+    """Publish from a worker thread (ServerCamera) onto the event loop."""
+    loop = _event_loop
+    if loop is None:
+        return
+    loop.call_soon_threadsafe(asyncio.ensure_future, _broadcast(payload))
 
 
-# ── Stdout reader thread ──────────────────────────────────────────────────────
-def _stdout_reader(proc: subprocess.Popen, loop: asyncio.AbstractEventLoop) -> None:
-    """
-    Reads JSON lines from worker stdout and schedules _handle_frame on the
-    event loop via call_soon_threadsafe (no asyncio.Queue, no loop-binding
-    issues with Python 3.9).
-    """
-    def dispatch(data: dict) -> None:
-        loop.call_soon_threadsafe(asyncio.ensure_future, _handle_frame(data))
-
-    try:
-        for raw in proc.stdout:              # type: ignore[union-attr]
-            if _stop_event.is_set():
-                break
-            line = raw.decode(errors="replace").strip()
-            if not line:
-                continue
-            try:
-                data = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if isinstance(data, dict):
-                dispatch(data)
-    except Exception as e:
-        dispatch({"error": str(e)})
-    finally:
-        dispatch({"_stopped": True})
+def _status_payload() -> Dict[str, Any]:
+    return {
+        "session": _session_state,
+        "session_error": _session_error,
+        "ready": _engine.ready,
+        "clients": len(_ws_clients),
+        "camera_source": config.CAMERA_SOURCE,
+        "server_camera_running": bool(_server_camera and _server_camera.running),
+        "drone": _drone.status(),
+        "engine": _engine.state() if _engine.ready else None,
+    }
 
 
-# ── Stderr drainer thread ─────────────────────────────────────────────────────
-def _stderr_drainer(proc: subprocess.Popen) -> None:
-    """Drains subprocess stderr so ONNX/cv2 logs never block the pipe."""
-    try:
-        for line in proc.stderr:             # type: ignore[union-attr]
-            if _stop_event.is_set():
-                break
-            decoded = line.decode(errors="replace").rstrip()
-            if decoded:
-                print(f"[worker] {decoded}", file=sys.stderr, flush=True)
-    except Exception:
-        pass
+async def _broadcast_status() -> None:
+    await _broadcast({"type": "status", **_status_payload()})
 
 
-# ── Startup / shutdown ────────────────────────────────────────────────────────
+# ── Lifecycle ────────────────────────────────────────────────────────────────
 @app.on_event("startup")
-async def _startup():
+async def _startup() -> None:
     global _event_loop
     _event_loop = asyncio.get_running_loop()
+    print("── Backpack gesture bridge ──", file=sys.stderr)
+    for key, value in config.describe().items():
+        print(f"  {key:18} {value}", file=sys.stderr)
+    if config.RUN_MODE == "live":
+        # Don't await this.  olympe spends ~16s failing to discover an absent
+        # aircraft, and blocking startup on that means the port is not even
+        # bound yet — the web UI is unreachable exactly when the operator wants
+        # it to tell them what went wrong.  Connect in the background and let
+        # the page's Connect button retry.
+        asyncio.create_task(_connect_drone_background())
+
+
+async def _connect_drone_background() -> None:
+    print("  RUN_MODE=live — connecting to drone in background…", file=sys.stderr)
+    loop = asyncio.get_running_loop()
+    ok, err = await loop.run_in_executor(_load_pool, _drone.connect)
+    print(f"  drone connect      {'ok' if ok else err}", file=sys.stderr)
+    await _broadcast({"type": "drone", "ok": ok, "message": err, **_drone.status()})
 
 
 @app.on_event("shutdown")
-async def _shutdown():
-    await _do_stop()
+async def _shutdown() -> None:
+    await _stop_session()
+    _drone.disconnect()
 
 
-# ── REST endpoints ────────────────────────────────────────────────────────────
+# ── Session control ──────────────────────────────────────────────────────────
+async def _stop_session() -> None:
+    global _session_state, _server_camera
+    if _server_camera is not None:
+        await asyncio.get_running_loop().run_in_executor(_load_pool, _server_camera.stop)
+        _server_camera = None
+    _session_state = "stopped"
+
+
 @app.post("/api/start")
-async def start_detector():
-    global _worker_proc, _reader_thread, _stderr_thread, _detector_ready
+async def start_session():
+    global _session_state, _session_error, _server_camera
 
-    if _worker_proc is not None and _worker_proc.poll() is None:
-        return JSONResponse({"status": "already_running"})
+    if _session_state in {"starting", "ready"}:
+        return JSONResponse({"status": "already_running", **_status_payload()})
 
-    if not _VENV_PYTHON.exists():
-        return JSONResponse(
-            {"status": "error", "message": f".venv Python not found at {_VENV_PYTHON}"},
-            status_code=500,
-        )
-
-    _detector_ready = False
-    _stop_event.clear()
-
-    try:
-        _worker_proc = subprocess.Popen(
-            [str(_VENV_PYTHON), str(_WORKER_SCRIPT), str(_GESTURE_ROOT)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-    except Exception as e:
-        print(traceback.format_exc(), file=sys.stderr, flush=True)
-        return JSONResponse({"status": "error", "message": f"{type(e).__name__}: {e}"}, status_code=500)
+    _session_state = "starting"
+    _session_error = None
+    await _broadcast({"type": "session", "state": "starting"})
 
     loop = asyncio.get_running_loop()
+    try:
+        await loop.run_in_executor(_load_pool, _engine.load)
+    except Exception as exc:
+        traceback.print_exc()
+        _session_state = "error"
+        _session_error = f"{type(exc).__name__}: {exc}"
+        await _broadcast({"type": "session", "state": "error", "message": _session_error})
+        return JSONResponse(
+            {"status": "error", "message": _session_error}, status_code=500
+        )
 
-    _reader_thread = threading.Thread(
-        target=_stdout_reader, args=(_worker_proc, loop), daemon=True
-    )
-    _reader_thread.start()
+    _engine.reset_state()
 
-    _stderr_thread = threading.Thread(
-        target=_stderr_drainer, args=(_worker_proc,), daemon=True
-    )
-    _stderr_thread.start()
+    if config.CAMERA_SOURCE == "server":
+        _server_camera = ServerCamera(_engine, _broadcast_threadsafe)
+        _server_camera.start()
 
-    await _broadcast({"status": "detector_starting"})
-    return JSONResponse({"status": "starting", "pid": _worker_proc.pid})
-
-
-async def _do_stop() -> None:
-    global _worker_proc, _reader_thread, _stderr_thread, _detector_ready
-    _stop_event.set()
-    if _worker_proc is not None:
-        try:
-            _worker_proc.terminate()
-            _worker_proc.wait(timeout=3)
-        except Exception:
-            try:
-                _worker_proc.kill()
-            except Exception:
-                pass
-    _worker_proc    = None
-    _reader_thread  = None
-    _stderr_thread  = None
-    _detector_ready = False
+    _session_state = "ready"
+    await _broadcast({"type": "session", "state": "ready"})
+    await _broadcast_status()
+    return JSONResponse({"status": "ready", **_status_payload()})
 
 
 @app.post("/api/stop")
-async def stop_detector():
-    if _worker_proc is None or _worker_proc.poll() is not None:
-        return JSONResponse({"status": "not_running"})
-    await _do_stop()
-    await _broadcast({"status": "detector_stopped"})
-    return JSONResponse({"status": "stopped"})
+async def stop_session():
+    if _session_state == "stopped":
+        return JSONResponse({"status": "not_running", **_status_payload()})
+    await _stop_session()
+    await _broadcast({"type": "session", "state": "stopped"})
+    await _broadcast_status()
+    return JSONResponse({"status": "stopped", **_status_payload()})
+
+
+# ── Introspection ────────────────────────────────────────────────────────────
+@app.get("/api/config")
+async def get_config():
+    return JSONResponse(config.describe())
+
+
+@app.get("/api/actions")
+async def get_actions():
+    return JSONResponse(
+        {
+            "actions": _engine.catalogue(),
+            "cooldown_seconds": _engine.cooldown_seconds,
+            "source": str(config.ACTIONS_PATH),
+        }
+    )
 
 
 @app.get("/api/status")
 async def get_status():
-    running = _worker_proc is not None and _worker_proc.poll() is None
-    return JSONResponse({
-        "running": running,
-        "ready":   _detector_ready,
-        "clients": len(_ws_clients),
-        "pid":     _worker_proc.pid if running else None,
-    })
+    return JSONResponse(_status_payload())
 
 
-# ── WebSocket ─────────────────────────────────────────────────────────────────
+# ── Drone control ────────────────────────────────────────────────────────────
+async def _drone_call(fn, *args, pool: Optional[ThreadPoolExecutor] = None):
+    """Run a blocking olympe call off the event loop and report the result."""
+    loop = asyncio.get_running_loop()
+    ok, err = await loop.run_in_executor(pool or _load_pool, fn, *args)
+    await _broadcast({"type": "drone", "ok": ok, "message": err, **_drone.status()})
+    status = 200 if ok else 409
+    return JSONResponse({"ok": ok, "message": err, "drone": _drone.status()}, status_code=status)
+
+
+@app.post("/api/drone/connect")
+async def drone_connect():
+    return await _drone_call(_drone.connect)
+
+
+@app.post("/api/drone/disconnect")
+async def drone_disconnect():
+    await asyncio.get_running_loop().run_in_executor(_load_pool, _drone.disconnect)
+    await _broadcast({"type": "drone", "ok": True, "message": None, **_drone.status()})
+    return JSONResponse({"ok": True, "drone": _drone.status()})
+
+
+@app.post("/api/drone/arm")
+async def drone_arm():
+    return await _drone_call(_drone.arm)
+
+
+@app.post("/api/drone/disarm")
+async def drone_disarm():
+    _drone.disarm()
+    await _broadcast({"type": "drone", "ok": True, "message": None, **_drone.status()})
+    return JSONResponse({"ok": True, "drone": _drone.status()})
+
+
+@app.post("/api/drone/takeoff")
+async def drone_takeoff():
+    return await _drone_call(_drone.takeoff)
+
+
+@app.post("/api/drone/land")
+async def drone_land():
+    return await _drone_call(_drone.land)
+
+
+@app.post("/api/drone/rth")
+async def drone_rth():
+    return await _drone_call(_drone.return_home)
+
+
+@app.post("/api/drone/emergency")
+async def drone_emergency():
+    return await _drone_call(_drone.emergency, pool=_emergency_pool)
+
+
+# ── Event WebSocket ──────────────────────────────────────────────────────────
 @app.websocket("/api/ws")
-async def gesture_websocket(websocket: WebSocket) -> None:
+async def event_socket(websocket: WebSocket) -> None:
     await websocket.accept()
     _ws_clients.add(websocket)
-    running = _worker_proc is not None and _worker_proc.poll() is None
-    if running and _detector_ready:
-        await websocket.send_text(json.dumps({"status": "detector_ready"}))
-    elif running:
-        await websocket.send_text(json.dumps({"status": "detector_starting"}))
-    else:
-        await websocket.send_text(json.dumps({"status": "detector_stopped"}))
     try:
+        await websocket.send_text(
+            json.dumps({"type": "hello", "config": config.describe(), **_status_payload()})
+        )
         while True:
             await asyncio.sleep(10)
-            await websocket.send_text(json.dumps({"ping": True}))
+            await websocket.send_text(json.dumps({"type": "ping"}))
     except (WebSocketDisconnect, Exception):
         pass
     finally:
         _ws_clients.discard(websocket)
 
 
+# ── Frame WebSocket (browser capture) ────────────────────────────────────────
+def _decode(payload: bytes) -> Optional[np.ndarray]:
+    buffer = np.frombuffer(payload, dtype=np.uint8)
+    return cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+
+
+@app.websocket("/api/ws/frames")
+async def frame_socket(websocket: WebSocket) -> None:
+    """
+    Binary JPEG frames in, detection events out on the same socket.
+
+    Frames that arrive while the previous one is still being processed are
+    dropped rather than queued: a backlog would make the drone react to gestures
+    the operator made seconds ago, which is worse than a lower frame rate.
+    """
+    await websocket.accept()
+    loop = asyncio.get_running_loop()
+
+    # One slot, always holding the newest frame.  Receiving and inference run as
+    # separate tasks so that a frame arriving mid-inference overwrites the slot
+    # instead of queueing behind it.
+    pending: Dict[str, Optional[bytes]] = {"frame": None}
+    closed = asyncio.Event()
+
+    async def process_latest() -> None:
+        while not closed.is_set():
+            payload = pending["frame"]
+            if (
+                payload is None
+                or not _engine.ready
+                or _session_state != "ready"
+                or config.CAMERA_SOURCE != "browser"
+            ):
+                await asyncio.sleep(0.005)
+                continue
+            pending["frame"] = None
+
+            frame = _decode(payload)
+            if frame is None:
+                continue
+
+            try:
+                result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+            except Exception as exc:
+                traceback.print_exc()
+                await websocket.send_text(
+                    json.dumps({"type": "error", "message": f"Inference error: {exc}"})
+                )
+                continue
+
+            await websocket.send_text(json.dumps({"type": "frame", **result}))
+            # Executions also go to the event socket so side panels stay in sync
+            # even if they are not the ones uploading frames.
+            if result["executions"]:
+                await _broadcast(
+                    {
+                        "type": "executions",
+                        "executions": result["executions"],
+                        "state": result["state"],
+                        "drone": _drone.status(),
+                    }
+                )
+
+    worker = asyncio.create_task(process_latest())
+    try:
+        while True:
+            message = await websocket.receive()
+            if message.get("type") == "websocket.disconnect":
+                break
+            payload = message.get("bytes")
+            if payload is not None:
+                pending["frame"] = payload
+    except (WebSocketDisconnect, Exception):
+        pass
+    finally:
+        closed.set()
+        worker.cancel()
+
+
+# ── MJPEG (server capture) ───────────────────────────────────────────────────
+@app.get("/api/video_feed")
+async def video_feed():
+    if config.CAMERA_SOURCE != "server":
+        return JSONResponse(
+            {"error": "CAMERA_SOURCE is not 'server'; the browser owns the camera."},
+            status_code=409,
+        )
+
+    async def stream():
+        boundary = b"--frame\r\n"
+        while _server_camera is not None and _server_camera.running:
+            jpeg = _server_camera.latest_jpeg()
+            if jpeg is not None:
+                yield boundary + b"Content-Type: image/jpeg\r\n\r\n" + jpeg + b"\r\n"
+            await asyncio.sleep(1 / 30)
+
+    return StreamingResponse(
+        stream(), media_type="multipart/x-mixed-replace; boundary=frame"
+    )
+
+
 # ── Static files (production build) ──────────────────────────────────────────
-_dist_dir = _THIS_DIR.parent / "dist"
+_dist_dir = Path(__file__).resolve().parent.parent / "dist"
 if _dist_dir.exists():
     app.mount("/", StaticFiles(directory=str(_dist_dir), html=True), name="static")
