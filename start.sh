@@ -37,6 +37,34 @@ export RUN_MODE="${RUN_MODE:-test}"
 export CAMERA_SOURCE="${CAMERA_SOURCE:-browser}"
 PORT="${PORT:-8000}"
 
+# Preflight: the gesture project is gitignored, so it is absent from a fresh
+# clone or a downloaded ZIP.  Catch that here rather than letting the detector
+# die on an unexplained "No module named 'utils'".
+GESTURE_DIR="${GESTURE_ROOT:-$REPO_ROOT/high_school_io_2025}"
+MISSING=()
+[[ -d "$GESTURE_DIR/dynamic_gestures/utils" ]] || MISSING+=("dynamic_gestures/utils")
+[[ -f "$GESTURE_DIR/dynamic_gestures/models/hand_detector.onnx" ]] || MISSING+=("models/hand_detector.onnx")
+[[ -f "$GESTURE_DIR/dynamic_gestures/models/crops_classifier.onnx" ]] || MISSING+=("models/crops_classifier.onnx")
+[[ -f "$GESTURE_DIR/actions.json" ]] || MISSING+=("actions.json")
+
+if [[ ${#MISSING[@]} -gt 0 ]]; then
+    cat >&2 <<EOF
+The gesture project is missing, so the detector cannot start.
+
+  Looked in : $GESTURE_DIR
+  Not found : ${MISSING[*]}
+
+That directory is gitignored — it is NOT in a clone or a downloaded ZIP.
+install.sh clones it together with the pretrained ONNX models.
+
+  Fix:  ./install.sh --live        (safe to re-run; finished steps are skipped)
+
+  Or point at an existing copy:
+        GESTURE_ROOT=/path/to/high_school_io_2025 ./start.sh
+EOF
+    exit 1
+fi
+
 if [[ ! -f "$REPO_ROOT/dist/index.html" ]]; then
     echo "! dist/ is missing — the API will run but there is no web UI."
     echo "  Build it with:  npm install && npm run build"

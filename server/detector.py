@@ -23,7 +23,15 @@ for _path in (str(config.GESTURE_ROOT), str(config.DYNAMIC_GESTURES_DIR)):
     if _path not in sys.path:
         sys.path.insert(0, _path)
 
-from utils import targets  # noqa: E402  — shared gesture vocabulary (45 labels)
+try:
+    from utils import targets  # noqa: E402  — shared gesture vocabulary (45 labels)
+except ModuleNotFoundError as exc:  # pragma: no cover — first-run setup path
+    # `No module named 'utils'` on its own tells nobody anything.  It almost
+    # always means high_school_io_2025/ was never cloned, because it is
+    # gitignored and install.sh is what fetches it.
+    raise ModuleNotFoundError(
+        config.missing_assets_message() or f"Could not import the gesture project: {exc}"
+    ) from exc
 
 __all__ = ["Detector", "targets"]
 

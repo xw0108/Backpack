@@ -95,6 +95,53 @@ HOST: str = _env("HOST", "0.0.0.0")
 PORT: int = int(_env("PORT", "8000"))
 
 
+#: Everything the detector needs that does not ship with this repo.
+REQUIRED_ASSETS = (
+    (DYNAMIC_GESTURES_DIR / "utils", "gesture vocabulary (dynamic_gestures/utils)"),
+    (DYNAMIC_GESTURES_DIR / "main_controller.py", "tracker (dynamic_gestures)"),
+    (HAND_DETECTOR_ONNX, "hand detector model"),
+    (CROPS_CLASSIFIER_ONNX, "gesture classifier model"),
+    (ACTIONS_PATH, "gesture → command map (actions.json)"),
+)
+
+
+def missing_assets() -> list:
+    """Paths from REQUIRED_ASSETS that are not on disk."""
+    return [(p, what) for p, what in REQUIRED_ASSETS if not p.exists()]
+
+
+def missing_assets_message() -> str:
+    """
+    An actionable error for the most common first-run failure.
+
+    high_school_io_2025/ is gitignored — it is cloned by install.sh, so it is
+    absent from a fresh clone or a downloaded ZIP.  Without it the detector
+    dies on `No module named 'utils'`, which says nothing useful.
+    """
+    missing = missing_assets()
+    if not missing:
+        return ""
+    lines = [
+        "The gesture project is missing, so the detector cannot start.",
+        "",
+        f"Looked for it in: {GESTURE_ROOT}",
+        "",
+        "Not found:",
+    ]
+    lines += [f"  - {what}: {path}" for path, what in missing]
+    lines += [
+        "",
+        "This directory is gitignored and is NOT part of a clone or a downloaded",
+        "ZIP — install.sh clones it, along with the pretrained ONNX models.",
+        "",
+        "Fix:  ./install.sh --live       (safe to re-run; finished steps are skipped)",
+        "",
+        "If the project lives elsewhere, point at it instead:",
+        "      GESTURE_ROOT=/path/to/high_school_io_2025 ./start.sh",
+    ]
+    return "\n".join(lines)
+
+
 def describe() -> dict:
     """Config snapshot for /api/status and startup logging."""
     return {
