@@ -162,6 +162,33 @@ On real Linux it just works.
 
 ---
 
+## Piloting authority (SkyController links)
+
+The single most confusing failure mode, and the reason a first flight looks like
+the web UI does nothing:
+
+> When the drone is reached **through a SkyController**, the physical sticks own
+> the aircraft. olympe accepts `moveBy` from the app, returns no error, logs
+> nothing — and **discards it before it reaches the device**. Takeoff/land fail
+> with a bare `AssertionError`. The handset keeps working perfectly, so it looks
+> like a bug in the gesture pipeline.
+
+Authority is therefore tied to arming:
+
+| Action | Piloting source becomes | Who flies |
+| --- | --- | --- |
+| **Arm** | `Controller` | this page |
+| **Disarm** | `SkyController` | the handset's sticks |
+| **Emergency** | `SkyController` | the handset's sticks |
+
+`/api/status` reports `drone.piloting_source`, and the UI shows it as a banner,
+so "who has the aircraft" is never something you have to guess. If the sticks
+still hold it, gesture commands are **refused with a reason** rather than
+reported as sent.
+
+Connecting over the drone's own wifi (`DRONE_CONNECTION=0`) has no SkyController
+in the path and skips all of this.
+
 ## Known quirk in `actions.json`
 
 `actions.json` calls one balance group `"vertical"` but points it at

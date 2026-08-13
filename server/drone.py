@@ -15,6 +15,10 @@ What is new relative to the desktop script:
     cover but a browser-only operator has no other way to trigger.
   * every call is serialised under a lock and every failure is captured, since
     calls now arrive from both the detection thread and HTTP handlers.
+  * piloting-authority handover.  When the drone is reached through a
+    SkyController, the physical sticks own the aircraft and olympe silently
+    discards every moveBy the app sends — the command never even reaches the
+    device.  Arming now takes authority, disarming gives it straight back.
 """
 
 import threading
@@ -48,6 +52,9 @@ class DroneController:
         self.last_error: Optional[str] = None
         self.last_command: Optional[Dict[str, Any]] = None
         self.flying: bool = False
+        # True when the link goes through a SkyController rather than the
+        # drone's own wifi — only then does piloting authority need handing over.
+        self._via_skycontroller: bool = False
 
     # ── connection ───────────────────────────────────────────────────────────
     def connect(self) -> Tuple[bool, Optional[str]]:
@@ -90,8 +97,71 @@ class DroneController:
 
             self.connected = True
             self.armed = False
+            self._via_skycontroller = connection in (1, "controller")
             self.last_error = None
             return True, None
+
+    # ── olympe escape hatches ────────────────────────────────────────────────
+    # SoftwarePilot exposes only a handful of wrapped calls, but the underlying
+    # olympe.Drone hangs off it — piloting authority and flight state have to be
+    # read and written there.
+    @property
+    def _olympe_drone(self):
+        return getattr(self._drone, "drone", None)
+
+    def piloting_source(self) -> Optional[str]:
+        """
+        Who currently owns the aircraft: 'SkyController' (the physical sticks)
+        or 'Controller' (this program).  None when not applicable or unknown.
+        """
+        if self.mode == "test" or not self._via_skycontroller:
+            return None
+        drone = self._olympe_drone
+        if drone is None:
+            return None
+        try:
+            from olympe.messages.skyctrl.CoPilotingState import pilotingSource
+
+            source = drone.get_state(pilotingSource)["source"]
+            return getattr(source, "name", str(source))
+        except Exception:
+            return None
+
+    def flying_state(self) -> Optional[str]:
+        """'landed' | 'hovering' | 'flying' | 'landing' | … or None if unknown."""
+        if self.mode == "test":
+            return None
+        drone = self._olympe_drone
+        if drone is None:
+            return None
+        try:
+            from olympe.messages.ardrone3.PilotingState import FlyingStateChanged
+
+            state = drone.get_state(FlyingStateChanged)["state"]
+            return getattr(state, "name", str(state))
+        except Exception:
+            return None
+
+    def _set_piloting_source(self, source: str) -> Tuple[bool, Optional[str]]:
+        """
+        Hand the aircraft between the physical sticks and this program.
+
+        Without this, every moveBy is dropped by olympe before it reaches the
+        device — no error, no log line, nothing moves.
+        """
+        if self.mode == "test" or not self._via_skycontroller:
+            return True, None
+        drone = self._olympe_drone
+        if drone is None:
+            return False, "Drone is not connected."
+        try:
+            from olympe.messages.skyctrl.CoPiloting import setPilotingSource
+
+            if not drone(setPilotingSource(source=source)).wait().success():
+                return False, f"SkyController refused to hand piloting to '{source}'."
+        except Exception as exc:
+            return False, f"setPilotingSource({source}) failed: {exc}"
+        return True, None
 
     @staticmethod
     def _explain_connect_failure(exc: Exception, connection) -> str:
@@ -125,15 +195,34 @@ class DroneController:
 
     # ── arming ───────────────────────────────────────────────────────────────
     def arm(self) -> Tuple[bool, Optional[str]]:
+        """
+        Arming is the handover: this program takes the aircraft, and the
+        SkyController's sticks stop flying it.  If that handover fails we stay
+        disarmed rather than pretending — the previous behaviour was to report
+        success and then silently drop every command.
+        """
         with self._lock:
             if self.mode == "live" and not self.connected:
                 return False, "Drone is not connected."
+
+            ok, err = self._set_piloting_source("Controller")
+            if not ok:
+                self.armed = False
+                self.last_error = err
+                return False, err
+
             self.armed = True
+            self.last_error = None
             return True, None
 
-    def disarm(self) -> None:
+    def disarm(self) -> Tuple[bool, Optional[str]]:
+        """Give the sticks back. Always disarms locally, even if handback fails."""
         with self._lock:
             self.armed = False
+            ok, err = self._set_piloting_source("SkyController")
+            if not ok:
+                self.last_error = err
+            return ok, err
 
     def _refusal(self) -> Optional[str]:
         """Why a flight command must not be sent right now, or None if it may be."""
@@ -143,6 +232,16 @@ class DroneController:
             return "Drone is not connected."
         if config.REQUIRE_ARM and not self.armed:
             return "Drone is disarmed — arm it before sending flight commands."
+        # Last line of defence against the failure that makes the UI lie: if the
+        # sticks still hold the aircraft, olympe will drop whatever we send
+        # without raising, and we would report it as delivered.
+        source = self.piloting_source()
+        if source is not None and source != "Controller":
+            return (
+                f"The SkyController's sticks still hold the aircraft "
+                f"(piloting source is '{source}'). Commands sent now would be "
+                f"discarded before reaching the drone — re-arm to take control."
+            )
         return None
 
     # ── command execution ────────────────────────────────────────────────────
@@ -195,13 +294,36 @@ class DroneController:
             return True, None
 
     # ── flight primitives (not in actions.json) ──────────────────────────────
+    # SoftwarePilot implements these as bare `assert drone(...).wait().success()`,
+    # so anything the aircraft declines arrives as an AssertionError carrying no
+    # message.  Check the flying state first, both to no-op when the request is
+    # already satisfied and to be able to say why it failed.
+    AIRBORNE = {"takingoff", "hovering", "flying", "usertakeoff", "motor_ramping"}
+
     def takeoff(self) -> Tuple[bool, Optional[str]]:
+        state = self.flying_state()
+        if state in self.AIRBORNE:
+            self.flying = True
+            return True, None
         ok, err = self._piloting("takeoff")
         if ok:
             self.flying = True
+        elif err and "AssertionError" in err:
+            err = (
+                "The aircraft declined takeoff. Common causes: it is not on a "
+                "flat surface, the propellers are obstructed, GPS/calibration is "
+                "not ready, or the battery is too low. Current flying state: "
+                f"{state or 'unknown'}."
+            )
         return ok, err
 
     def land(self) -> Tuple[bool, Optional[str]]:
+        # Landing an aircraft that is already down is a no-op, not a failure.
+        # Reporting 409 here is what made the UI look dead after the first
+        # emergency stop.
+        if self.flying_state() == "landed":
+            self.flying = False
+            return True, None
         ok, err = self._piloting("land")
         if ok:
             self.flying = False
@@ -240,21 +362,32 @@ class DroneController:
                 self.flying = False
                 return True, None
 
-        problems = []
+        state = self.flying_state()
+
+        # Best-effort: cancelling a move that is not running, or landing an
+        # aircraft that is already down, both raise here.  Neither means the
+        # emergency stop failed, and reporting failure would leave the operator
+        # mashing a button that returns 409 forever.
         try:
             drone.piloting.cancel_move_by()
-        except Exception as exc:
-            problems.append(f"cancel_move_by: {exc}")
-        try:
-            drone.piloting.land()
-            self.flying = False
-        except Exception as exc:
-            problems.append(f"land: {exc}")
+        except Exception:
+            pass
 
-        if problems:
-            err = "; ".join(problems)
-            self.last_error = err
-            return False, err
+        landed = state == "landed"
+        if not landed:
+            try:
+                drone.piloting.land()
+                landed = True
+            except Exception as exc:
+                self.last_error = f"Emergency landing was declined: {exc}"
+        self.flying = not landed
+
+        # Hand the aircraft back to the physical sticks so the human pilot has
+        # authority the moment the web side gives up.
+        self._set_piloting_source("SkyController")
+
+        if not landed:
+            return False, self.last_error
         return True, None
 
     def _piloting(self, method: str) -> Tuple[bool, Optional[str]]:
@@ -285,12 +418,18 @@ class DroneController:
 
     def status(self) -> Dict[str, Any]:
         with self._lock:
+            flying_state = self.flying_state()
             return {
                 "mode": self.mode,
                 "connected": self.connected,
                 "armed": self.armed,
                 "require_arm": config.REQUIRE_ARM,
                 "flying": self.flying,
+                # Surfaced so the operator can see who actually holds the
+                # aircraft, rather than inferring it from things not moving.
+                "piloting_source": self.piloting_source(),
+                "via_skycontroller": self._via_skycontroller,
+                "flying_state": flying_state,
                 "last_error": self.last_error,
                 "last_command": self.last_command,
             }

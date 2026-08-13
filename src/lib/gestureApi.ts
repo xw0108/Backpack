@@ -51,6 +51,11 @@ export interface DroneStatus {
   armed: boolean;
   require_arm: boolean;
   flying: boolean;
+  /** 'Controller' = this app holds the aircraft, 'SkyController' = the sticks do. */
+  piloting_source: string | null;
+  via_skycontroller: boolean;
+  /** 'landed' | 'hovering' | 'flying' | … straight from the aircraft. */
+  flying_state: string | null;
   last_error: string | null;
   last_command: {
     component: string;

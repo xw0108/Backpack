@@ -253,9 +253,9 @@ async def drone_arm():
 
 @app.post("/api/drone/disarm")
 async def drone_disarm():
-    _drone.disarm()
-    await _broadcast({"type": "drone", "ok": True, "message": None, **_drone.status()})
-    return JSONResponse({"ok": True, "drone": _drone.status()})
+    # Disarming now hands piloting back to the SkyController, which is a real
+    # (blocking) olympe round-trip rather than a local flag flip.
+    return await _drone_call(_drone.disarm)
 
 
 @app.post("/api/drone/takeoff")

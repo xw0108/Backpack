@@ -378,13 +378,16 @@ export default function DroneControlPanel() {
 
   // ── Render ───────────────────────────────────────────────────────────────
   const armed = !!drone?.armed;
-  const gateBlocking = isLive && drone?.require_arm && !armed;
+  const sticksHaveControl =
+    !!drone?.via_skycontroller && drone.piloting_source !== null &&
+    drone.piloting_source !== 'Controller';
+  const gateBlocking = isLive && ((drone?.require_arm && !armed) || sticksHaveControl);
 
   return (
     <div className="flex flex-col xl:flex-row h-[calc(100vh-64px)] overflow-hidden bg-stone-900 text-stone-100">
       {/* ── CAMERA ── */}
       <main className="flex-grow flex flex-col min-w-0 bg-stone-950">
-        <div className="px-5 py-4 border-b border-stone-800 flex items-center gap-3 flex-wrap">
+        <div className="shrink-0 px-5 py-4 border-b border-stone-800 flex items-center gap-3 flex-wrap">
           <div className="p-2 bg-violet-950 border border-violet-800 text-violet-400 rounded-xl">
             <Hand size={18} />
           </div>
@@ -416,9 +419,12 @@ export default function DroneControlPanel() {
           </div>
         </div>
 
-        {/* Video surface */}
-        <div className="flex-grow flex items-center justify-center p-5 min-h-0">
-          <div className="relative w-full max-w-3xl aspect-[4/3] bg-black rounded-2xl overflow-hidden border border-stone-800">
+        {/* Video surface.
+            Sized from the available HEIGHT (h-full + aspect ratio), not the
+            width — driving it from the width made the box taller than its
+            container and spill over the gesture grid below. */}
+        <div className="flex-1 min-h-0 flex items-center justify-center p-4">
+          <div className="relative h-full max-h-full max-w-full aspect-[4/3] bg-black rounded-2xl overflow-hidden border border-stone-800">
             {serverCamera ? (
               sessionReady ? (
                 <img
@@ -454,7 +460,10 @@ export default function DroneControlPanel() {
 
             {gateBlocking && (capturing || status?.server_camera_running) && (
               <div className="absolute top-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-950/80 border border-amber-600/50 text-amber-300 text-[11px] font-mono font-bold backdrop-blur">
-                <Lock size={12} /> DISARMED — gestures recognised, not flown
+                <Lock size={12} />
+                {sticksHaveControl
+                  ? 'SKYCONTROLLER HAS CONTROL — gestures recognised, not flown'
+                  : 'DISARMED — gestures recognised, not flown'}
               </div>
             )}
 
@@ -467,13 +476,13 @@ export default function DroneControlPanel() {
         </div>
 
         {cameraError && (
-          <p className="mx-5 mb-4 text-[11px] font-mono text-rose-400 bg-rose-950/30 border border-rose-800/40 rounded-lg px-3 py-2">
+          <p className="shrink-0 mx-5 mb-4 text-[11px] font-mono text-rose-400 bg-rose-950/30 border border-rose-800/40 rounded-lg px-3 py-2">
             {cameraError}
           </p>
         )}
 
         {/* Gesture reference — driven entirely by actions.json */}
-        <div className="border-t border-stone-800 p-5 overflow-y-auto max-h-[38%]">
+        <div className="shrink-0 border-t border-stone-800 p-5 overflow-y-auto max-h-[34%]">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-[9px] uppercase font-mono font-black tracking-widest text-violet-400">
               actions.json
@@ -589,9 +598,31 @@ export default function DroneControlPanel() {
           <div className="grid grid-cols-2 gap-2 text-[10px] font-mono mb-3">
             <StateCell label="connected" ok={!!drone?.connected} />
             <StateCell label="armed" ok={armed} />
-            <StateCell label="flying" ok={!!drone?.flying} />
+            <StateCell label="state" text={drone?.flying_state ?? '—'} />
             <StateCell label="mode" text={drone?.mode ?? '—'} />
           </div>
+
+          {/* Who actually holds the aircraft.  When the sticks do, olympe drops
+              every command this page sends before it reaches the drone — which
+              looks exactly like the app being broken. */}
+          {drone?.via_skycontroller && (
+            <div
+              className={cn(
+                'mb-3 px-3 py-2.5 rounded-lg border text-[10px] font-mono leading-relaxed',
+                drone.piloting_source === 'Controller'
+                  ? 'bg-emerald-950/30 border-emerald-700/50 text-emerald-300'
+                  : 'bg-amber-950/30 border-amber-700/50 text-amber-300'
+              )}
+            >
+              <div className="flex items-center gap-1.5 font-black uppercase tracking-wider mb-1">
+                {drone.piloting_source === 'Controller' ? <LockOpen size={11} /> : <Lock size={11} />}
+                piloting source: {drone.piloting_source ?? 'unknown'}
+              </div>
+              {drone.piloting_source === 'Controller'
+                ? 'This page is flying the aircraft. The SkyController sticks are inactive — press Disarm to give them back.'
+                : "The SkyController's sticks are flying the aircraft. Gesture commands would be discarded before reaching the drone. Press Arm to take control."}
+            </div>
+          )}
 
           {isLive && (
             <div className="space-y-2">
@@ -618,7 +649,11 @@ export default function DroneControlPanel() {
               <div className="flex gap-2">
                 <SmallButton
                   onClick={confirmThen(
-                    'Arm the drone?\n\nOnce armed, a recognised gesture will move the aircraft for real. Make sure the area is clear.',
+                    'Arm the drone?\n\n' +
+                      'This takes piloting authority away from the SkyController — ' +
+                      'its sticks will stop flying the aircraft until you press Disarm.\n\n' +
+                      'A recognised gesture will then move the drone for real. ' +
+                      'Make sure the area is clear.',
                     () => run('arm', api.arm)
                   )}
                   disabled={!drone?.connected || armed || busy === 'arm'}

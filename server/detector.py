@@ -35,6 +35,7 @@ class Detector:
 
     def __init__(self) -> None:
         self.kind = config.DETECTOR
+        self._tracker_errors = 0
         if self.kind == "dynamic_gestures":
             self._init_dynamic_gestures()
         elif self.kind == "yolo":
@@ -73,7 +74,24 @@ class Detector:
     # ── inference ────────────────────────────────────────────────────────────
     def __call__(self, frame) -> Tuple[np.ndarray, List, List[Optional[int]]]:
         if self.kind == "dynamic_gestures":
-            bboxes, ids, labels = self._controller(frame)
+            try:
+                bboxes, ids, labels = self._controller(frame)
+            except Exception as exc:
+                # dynamic_gestures' vendored OCSort/filterpy occasionally throws
+                # while re-acquiring a lost track ("only 0-dimensional arrays can
+                # be converted to Python scalars" in kalmanfilter.unfreeze, a
+                # numpy-version incompatibility upstream).  One bad frame is not
+                # worth tearing down the session or spamming the operator, so
+                # treat it as a frame with no detections.
+                self._tracker_errors += 1
+                if self._tracker_errors in (1, 10) or self._tracker_errors % 100 == 0:
+                    print(
+                        f"[detector] tracker error #{self._tracker_errors} "
+                        f"(frame dropped): {type(exc).__name__}: {exc}",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                return _EMPTY
             # MainController returns (None, None, None) when nothing is tracked.
             if bboxes is None or len(bboxes) == 0:
                 return _EMPTY
