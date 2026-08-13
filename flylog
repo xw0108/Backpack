@@ -1,0 +1,1114 @@
+  RUN_MODE=live — connecting to drone in background…
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+<string>:3: SyntaxWarning: invalid escape sequence '\ '
+<string>:3: SyntaxWarning: invalid escape sequence '\_'
+2026-08-13 18:56:43,517 [INFO] 	olympe.backend - _create_pomp_loop - Creating pomp loop
+2026-08-13 18:56:43,519 [INFO] 	olympe.backend - _do_create - device callbacks have been added to arsdk_ctrl
+2026-08-13 18:56:43,520 [INFO] 	olympe.scheduler - _create_pomp_loop - Creating pomp loop
+2026-08-13 18:56:43,529 [INFO] 	olympe.media - _create_pomp_loop - Creating pomp loop
+2026-08-13 18:56:43,558 [INFO] 	olympe.backend - _device_added_cb - DiscoveryNet: New device has been detected: 'Skycontroller 3'
+2026-08-13 18:56:43,562 [INFO] 	olympe.drone - _connecting_cb - Connecting to device: Skycontroller 3
+2026-08-13 18:56:43,562 [INFO] 	olympe.drone - _connect_impl - Connection in progress...
+2026-08-13 18:56:43,564 [INFO] 	olympe.drone.Skycontroller 3 - _aconnected_cb - Connected to device: Skycontroller 3
+2026-08-13 18:56:43,564 [INFO] 	olympe.drone.Skycontroller 3 - _aconnected_cb - {'c2d_port': 2233,
+ 'c2d_update_port': 51,
+ 'c2d_user_port': 21,
+ 'proto_v': 3,
+ 'qos_mode': 0,
+ 'status': 0}
+2026-08-13 18:56:43,564 [INFO] 	olympe.drone.Skycontroller 3 - _create_command_interface - Command interface has been created
+2026-08-13 18:56:43,578 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - skyctrl.Common.CurrentDateTime(datetime='20260813T185643-0400') has been sent to the device
+2026-08-13 18:56:43,580 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - skyctrl.Common.AllStates() has been sent to the device
+2026-08-13 18:56:43,583 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.CommonState.CurrentDateTimeChanged(datetime='20260813T185643-0400')
+2026-08-13 18:56:43,583 [INFO] 	olympe.drone.Skycontroller 3 - _on_sync_done - Synchronization of b'192.168.53.1' at 20260813T185643-0400
+2026-08-13 18:56:43,729 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.SettingsState.ProductVersionChanged(software='1.8.1', hardware='2')
+2026-08-13 18:56:43,730 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.SettingsState.ProductSerialChanged(serialNumber='PI040443AA8E007833')
+2026-08-13 18:56:43,730 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.SkyControllerState.BatteryChanged(percent=255)
+2026-08-13 18:56:43,731 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.SkyControllerState.BatteryState(state='charging')
+2026-08-13 18:56:43,880 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - drone_manager.connection_state(state='connected', serial='PI040416BA8H083200', model=2324, name='ANAFI-H083200')
+2026-08-13 18:56:43,881 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.CalibrationState.MagnetoCalibrationState(status='Calibrated', X_Quality=255, Y_Quality=255, Z_Quality=255)
+2026-08-13 18:56:43,881 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.CalibrationState.MagnetoCalibrationQualityUpdatesState(enabled=0)
+2026-08-13 18:56:43,881 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.CommonState.AllStatesChanged()
+2026-08-13 18:56:43,883 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.DeviceState.ConnexionChanged(status='connected', deviceName='ANAFI-H083200', deviceProductID=2324)
+2026-08-13 18:56:43,885 [INFO] 	olympe.drone.Skycontroller 3 - _on_connection_state_changed - Skycontroller connected to drone
+2026-08-13 18:56:43,888 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - skyctrl.Settings.AllSettings() has been sent to the device
+2026-08-13 18:56:43,896 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - common.Common.AllStates() has been sent to the device
+2026-08-13 18:56:43,897 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - common.Settings.AllSettings() has been sent to the device
+2026-08-13 18:56:43,899 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - mission.custom_msg_enable() has been sent to the device
+2026-08-13 18:56:44,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.SettingsState.CPUID(id='337608793
+')
+2026-08-13 18:56:44,071 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BatteryStateChanged(percent=52)
+2026-08-13 18:56:44,196 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mapper.active_product(product=2324)
+2026-08-13 18:56:44,196 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mapper.volatile_mapping_state(active=0)
+2026-08-13 18:56:44,197 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.CoPilotingState.pilotingSource(source='SkyController')
+2026-08-13 18:56:44,198 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - drone_manager.known_drone_item(serial='PI040416BA8H083200', model=2324, name='ANAFI-H083200', security='wpa2', has_saved_key=1, list_flags='First')
+2026-08-13 18:56:44,198 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - drone_manager.known_drone_item(serial='PI040416AA8G033016', model=2324, name='ANAFI-G033016', security='wpa2', has_saved_key=1, list_flags='')
+2026-08-13 18:56:44,199 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - drone_manager.known_drone_item(serial='PI040416AA8E003818', model=2324, name='ANAFI-E003818', security='wpa2', has_saved_key=1, list_flags='')
+2026-08-13 18:56:44,200 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - drone_manager.known_drone_item(serial='PI040416AA8E005250', model=2324, name='ANAFI-E005250', security='wpa2', has_saved_key=1, list_flags='Last')
+2026-08-13 18:56:44,201 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - skyctrl.SettingsState.AllSettingsChanged()
+2026-08-13 18:56:44,208 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:56:44,211 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.ARLibsVersionsState.DeviceLibARCommandsVersion(version='4.0.0.4')
+2026-08-13 18:56:44,212 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BootId(bootId='87E113BE961C4CD32663984F641064BC')
+2026-08-13 18:56:44,213 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.FlyingStateChanged(state='landed')
+2026-08-13 18:56:44,215 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.MotionState(state='steady')
+2026-08-13 18:56:44,216 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.MotionState(state='steady')
+2026-08-13 18:56:44,217 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CalibrationState.MagnetoCalibrationRequiredState(required=0)
+2026-08-13 18:56:44,218 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.AlertStateChanged(state='none')
+2026-08-13 18:56:44,219 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.SensorsStatesListChanged(sensorName='IMU', sensorState=1, list_flags='')
+2026-08-13 18:56:44,219 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.SensorsStatesListChanged(sensorName='magnetometer', sensorState=1, list_flags='')
+2026-08-13 18:56:44,220 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.SensorsStatesListChanged(sensorName='barometer', sensorState=1, list_flags='')
+2026-08-13 18:56:44,221 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.SensorsStatesListChanged(sensorName='GPS', sensorState=1, list_flags='')
+2026-08-13 18:56:44,225 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.SensorsStatesListChanged(sensorName='ultrasound', sensorState=1, list_flags='')
+2026-08-13 18:56:44,226 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.SensorsStatesListChanged(sensorName='vertical_camera', sensorState=1, list_flags='')
+2026-08-13 18:56:44,227 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - battery.alert(alert='power_level', level='none', list_flags='First')
+2026-08-13 18:56:44,227 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - battery.alert(alert='too_hot', level='none', list_flags='')
+2026-08-13 18:56:44,228 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - battery.alert(alert='too_cold', level='none', list_flags='Last')
+2026-08-13 18:56:44,230 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - battery.health(state_of_health=65)
+2026-08-13 18:56:44,230 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - battery.cycle_count(count=33)
+2026-08-13 18:56:44,231 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - battery.serial(serial='C8G095832')
+2026-08-13 18:56:44,231 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSSettingsState.GPSFixStateChanged(fixed=0)
+2026-08-13 18:56:44,232 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.ProductGPSVersionChanged(software='3.01R', hardware='')
+2026-08-13 18:56:44,232 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.MotorSoftwareVersionChanged(version='1.19.R.4')
+2026-08-13 18:56:44,233 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.MotorErrorStateChanged(motorIds=15, motorError='noError')
+2026-08-13 18:56:44,234 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.MotorFlightsStatusChanged(nbFlights=430, lastFlightDuration=8, totalFlightDuration=64831)
+2026-08-13 18:56:44,234 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.MotorErrorLastErrorChanged(motorError='noError')
+2026-08-13 18:56:44,235 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - user_storage.state(physical_state='available', file_system_state='ready', attribute='', monitor_enabled=0, monitor_period=0)
+2026-08-13 18:56:44,235 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - user_storage.info(name='ANAFI', capacity=63847792640)
+2026-08-13 18:56:44,236 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - user_storage.supported_formatting_types(supported_types='full|quick')
+2026-08-13 18:56:44,237 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CalibrationState.MagnetoCalibrationStartedChanged(started=0)
+2026-08-13 18:56:44,237 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.NavigateHomeStateChanged(state='unavailable', reason='disabled')
+2026-08-13 18:56:44,238 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSState.HomeTypeAvailabilityChanged(type='TAKEOFF', available=0, list_flags='')
+2026-08-13 18:56:44,238 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSState.HomeTypeAvailabilityChanged(type='PILOT', available=0, list_flags='')
+2026-08-13 18:56:44,239 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSState.HomeTypeAvailabilityChanged(type='FIRST_FIX', available=0, list_flags='')
+2026-08-13 18:56:44,239 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSState.HomeTypeAvailabilityChanged(type='FOLLOWEE', available=0, list_flags='')
+2026-08-13 18:56:44,240 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSState.HomeTypeChosenChanged(type='TAKEOFF')
+2026-08-13 18:56:44,241 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.home_type(type='takeoff')
+2026-08-13 18:56:44,243 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSSettingsState.HomeChanged(latitude=500.0, longitude=500.0, altitude=500.0)
+2026-08-13 18:56:44,332 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.takeoff_location(latitude=0.0, longitude=0.0, altitude=0.0, fixed_before_takeoff=0)
+2026-08-13 18:56:44,333 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.home_reachability(status='unknown')
+2026-08-13 18:56:44,333 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.rth_auto_trigger(reason='none', delay=0)
+2026-08-13 18:56:44,334 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.ForcedLandingAutoTrigger(reason='NONE', delay=0)
+2026-08-13 18:56:44,335 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - hand_land.state(state='idle')
+2026-08-13 18:56:44,335 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.WindStateChanged(state='ok')
+2026-08-13 18:56:44,336 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.VibrationLevelChanged(state='ok')
+2026-08-13 18:56:44,337 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.MavlinkState.MavlinkFilePlayingStateChanged(state='stopped', filepath='', type='flightPlan')
+2026-08-13 18:56:44,337 [WARNING] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - Unknown message id 0xa2000005
+2026-08-13 18:56:44,338 [WARNING] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - Unknown message id 0xa2000004
+2026-08-13 18:56:44,341 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - auto_look_at.state(mode='none', behavior='idle')
+2026-08-13 18:56:44,344 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.state(mode='none', behavior='idle', animation='none', animation_available='')
+2026-08-13 18:56:44,344 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.target_framing_position_changed(horizontal=0, vertical=0)
+2026-08-13 18:56:44,345 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.target_image_detection_state(state='none')
+2026-08-13 18:56:44,346 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.target_is_controller(state=0)
+2026-08-13 18:56:44,347 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='look_at', missing_requirements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:56:44,348 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='geographic', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:56:44,354 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='relative', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:56:44,355 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='leash', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:56:44,357 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - animation.availability(values='')
+2026-08-13 18:56:44,358 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.FlightPlanState.ComponentStateListChanged(component='GPS', State=0, list_flags='')
+2026-08-13 18:56:44,359 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.FlightPlanState.ComponentStateListChanged(component='Calibration', State=1, list_flags='')
+2026-08-13 18:56:44,360 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.FlightPlanState.ComponentStateListChanged(component='TakeOff', State=1, list_flags='')
+2026-08-13 18:56:44,361 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.FlightPlanState.AvailabilityStateChanged(AvailabilityState=0)
+2026-08-13 18:56:44,362 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.PilotedPOI(latitude=0.0, longitude=0.0, altitude=0.0, status='UNAVAILABLE')
+2026-08-13 18:56:44,362 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.PilotedPOIV2(latitude=0.0, longitude=0.0, altitude=0.0, mode='locked_once_gimbal', status='UNAVAILABLE')
+2026-08-13 18:56:44,363 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SoundState.AlertSound(state='stopped')
+2026-08-13 18:56:44,364 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mediastore.state(state='indexed')
+2026-08-13 18:56:44,364 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mediastore.counters(video_media_count=129, photo_media_count=350, video_resource_count=129, photo_resource_count=350)
+2026-08-13 18:56:44,365 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.HoveringWarning(no_gps_too_dark=1, no_gps_too_high=0)
+2026-08-13 18:56:44,365 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.camera_mode(cam_id=0, mode='recording', list_flags='')
+2026-08-13 18:56:44,366 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.hdr_setting(cam_id=0, value='inactive', list_flags='')
+2026-08-13 18:56:44,367 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.hdr(cam_id=0, available='available', state='inactive', list_flags='')
+2026-08-13 18:56:44,367 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_mode(cam_id=0, mode='single', format='rectilinear', file_format='jpeg', burst='burst_14_over_1s', bracketing='preset_1ev', capture_interval=0.0, list_flags='')
+2026-08-13 18:56:44,368 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_mode(cam_id=0, mode='standard', resolution='res_1080p', framerate='fps_30', hyperlapse='ratio_15', bitrate=30000000, list_flags='')
+2026-08-13 18:56:44,369 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.white_balance(cam_id=0, mode='automatic', temperature='t_2250', lock='inactive', list_flags='')
+2026-08-13 18:56:44,370 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.exposure_settings(cam_id=0, mode='automatic_prefer_shutter_speed', manual_shutter_speed='shutter_1_over_50', manual_shutter_speed_capabilities='shutter_1_over_10000|shutter_1_over_8000|shutter_1_over_6400|shutter_1_over_5000|shutter_1_over_4000|shutter_1_over_3200|shutter_1_over_2500|shutter_1_over_2000|shutter_1_over_1600|shutter_1_over_1250|shutter_1_over_1000|shutter_1_over_800|shutter_1_over_640|shutter_1_over_500|shutter_1_over_400|shutter_1_over_320|shutter_1_over_240|shutter_1_over_200|shutter_1_over_160|shutter_1_over_120|shutter_1_over_100|shutter_1_over_80|shutter_1_over_60|shutter_1_over_50|shutter_1_over_40|shutter_1_over_30', manual_iso_sensitivity='iso_1200', manual_iso_sensitivity_capabilities='iso_100|iso_160|iso_200|iso_320|iso_400|iso_640|iso_800|iso_1200|iso_1600|iso_2500|iso_3200', max_iso_sensitivity='iso_3200', max_iso_sensitivities_capabilities='iso_3200', metering_mode='standard', list_flags='')
+2026-08-13 18:56:44,371 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.ev_compensation(cam_id=0, value='ev_0_00', list_flags='')
+2026-08-13 18:56:44,372 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.style(cam_id=0, style='standard', saturation=0, saturation_min=-2, saturation_max=2, contrast=0, contrast_min=-2, contrast_max=2, sharpness=0, sharpness_min=-1, sharpness_max=1, list_flags='')
+2026-08-13 18:56:44,372 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_state(cam_id=0, available='available', state='inactive', start_timestamp=0, list_flags='')
+2026-08-13 18:56:44,373 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.MediaRecordState.VideoStateChangedV2(state='stopped', error='ok')
+2026-08-13 18:56:44,373 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_state(cam_id=0, available='not_available', state='inactive', list_flags='')
+2026-08-13 18:56:44,375 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.alignment_offsets(cam_id=0, min_bound_yaw=0.0, max_bound_yaw=0.0, current_yaw=0.0, min_bound_pitch=0.0, max_bound_pitch=0.0, current_pitch=0.0, min_bound_roll=0.0, max_bound_roll=0.0, current_roll=0.0, list_flags='')
+2026-08-13 18:56:44,376 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.antiflicker_mode(mode='mode_50hz', value='mode_50hz')
+2026-08-13 18:56:44,382 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.camera_states(active_cameras=1)
+2026-08-13 18:56:44,383 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.zoom_info(cam_id=0, available='available', high_quality_maximum_level=2.8000051975250244, maximum_level=2.9999840259552, list_flags='')
+2026-08-13 18:56:44,384 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.axis_lock_state(gimbal_id=0, locked='', list_flags='')
+2026-08-13 18:56:44,384 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.alert(gimbal_id=0, error='', list_flags='')
+2026-08-13 18:56:44,385 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - animation.state(type='none', percent=0)
+2026-08-13 18:56:44,386 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.SettingsState.BoardIdChanged(id='0x0')
+2026-08-13 18:56:44,386 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - precise_home.mode(mode='disabled')
+2026-08-13 18:56:44,387 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - precise_home.state(state='unavailable')
+2026-08-13 18:56:44,388 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - onboard_tracker.tracking_feature_availability(availability=0)
+2026-08-13 18:56:44,392 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - piloting_style.style(style='standard')
+2026-08-13 18:56:44,393 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mission.state(uid='', state='unavailable', unavailability_reason='broken', list_flags='')
+2026-08-13 18:56:44,394 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gauge_fw_updater.status(diag='up_to_date', missing_requirements='usb', state='ready_to_prepare')
+2026-08-13 18:56:44,395 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - dri.drone_id(type='ANSI_CTA_2063', value='1588E040416BA083200')
+2026-08-13 18:56:44,396 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - dri.dri_type(id='', type='en4709_002', status='invalid_id')
+2026-08-13 18:56:44,398 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - security_edition.log_storage_state(log_storage_state='enabled')
+2026-08-13 18:56:44,399 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.FlightId(flightId='')
+2026-08-13 18:56:44,400 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.AllStatesChanged()
+2026-08-13 18:56:44,401 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.SettingsState.ProductSerialHighChanged(high='PI040416B')
+2026-08-13 18:56:44,401 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.SettingsState.ProductSerialLowChanged(low='A8H083200')
+2026-08-13 18:56:44,402 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.SettingsState.ProductVersionChanged(software='1.8.2', hardware='HW_03')
+2026-08-13 18:56:44,404 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.camera_capabilities(cam_id=0, model='main', exposure_modes='automatic|automatic_prefer_iso_sensitivity|automatic_prefer_shutter_speed|manual_iso_sensitivity|manual_shutter_speed|manual', exposure_lock_supported='supported', exposure_roi_lock_supported='supported', ev_compensations='ev_minus_3_00|ev_minus_2_67|ev_minus_2_33|ev_minus_2_00|ev_minus_1_67|ev_minus_1_33|ev_minus_1_00|ev_minus_0_67|ev_minus_0_33|ev_0_00|ev_0_33|ev_0_67|ev_1_00|ev_1_33|ev_1_67|ev_2_00|ev_2_33|ev_2_67|ev_3_00', white_balance_modes='automatic|incandescent|fluorescent|sunny|cloudy|shaded|custom', custom_white_balance_temperatures='t_2000|t_2250|t_2500|t_2750|t_3000|t_3250|t_3500|t_3750|t_4000|t_4250|t_4500|t_4750|t_5000|t_5250|t_5500|t_5750|t_6000|t_6250|t_6500|t_6750|t_7000|t_7250|t_7500|t_7750|t_8000|t_8250|t_8500|t_8750|t_9000|t_9250|t_9500|t_9750|t_10000', white_balance_lock_supported='supported', styles='standard|plog|intense|pastel', camera_modes='recording|photo', hyperlapse_values='ratio_15|ratio_30|ratio_60|ratio_120|ratio_240', bracketing_presets='preset_1ev|preset_2ev|preset_3ev|preset_1ev_2ev|preset_1ev_3ev|preset_2ev_3ev|preset_1ev_2ev_3ev', burst_values='burst_14_over_1s', streaming_modes='', timelapse_interval_min=2.0, gpslapse_interval_min=1.0, auto_exposure_metering_modes='standard|center_top', list_flags='')
+2026-08-13 18:56:44,405 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_capabilities(id=0, recording_modes='standard|hyperlapse', resolutions='res_1080p', framerates='fps_24|fps_25|fps_30', hdr='supported', list_flags='First')
+2026-08-13 18:56:44,405 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_capabilities(id=1, recording_modes='standard', resolutions='res_dci_4k', framerates='fps_24', hdr='not_supported', list_flags='')
+2026-08-13 18:56:44,406 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_capabilities(id=2, recording_modes='standard|hyperlapse', resolutions='res_uhd_4k', framerates='fps_24|fps_25|fps_30', hdr='supported', list_flags='')
+2026-08-13 18:56:44,408 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_capabilities(id=3, recording_modes='standard|hyperlapse', resolutions='res_2_7k', framerates='fps_24|fps_25|fps_30', hdr='supported', list_flags='')
+2026-08-13 18:56:44,409 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_capabilities(id=4, recording_modes='slow_motion|high_framerate', resolutions='res_1080p', framerates='fps_48|fps_50|fps_60', hdr='not_supported', list_flags='')
+2026-08-13 18:56:44,410 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_capabilities(id=5, recording_modes='slow_motion|high_framerate', resolutions='res_720p', framerates='fps_96|fps_100|fps_120', hdr='not_supported', list_flags='Last')
+2026-08-13 18:56:44,412 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_capabilities(id=0, photo_modes='single|time_lapse|gps_lapse', photo_formats='full_frame', photo_file_formats='dng_jpeg', hdr='not_supported', list_flags='First')
+2026-08-13 18:56:44,416 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_capabilities(id=1, photo_modes='single|time_lapse|gps_lapse', photo_formats='rectilinear', photo_file_formats='dng_jpeg', hdr='not_supported', list_flags='')
+2026-08-13 18:56:44,419 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_capabilities(id=2, photo_modes='single|burst|time_lapse|gps_lapse', photo_formats='full_frame', photo_file_formats='jpeg', hdr='supported', list_flags='')
+2026-08-13 18:56:44,420 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_capabilities(id=3, photo_modes='single|burst|time_lapse|gps_lapse', photo_formats='rectilinear', photo_file_formats='jpeg', hdr='supported', list_flags='')
+2026-08-13 18:56:44,421 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_capabilities(id=4, photo_modes='bracketing', photo_formats='full_frame', photo_file_formats='jpeg|dng_jpeg', hdr='not_supported', list_flags='')
+2026-08-13 18:56:44,422 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.photo_capabilities(id=5, photo_modes='bracketing', photo_formats='rectilinear', photo_file_formats='jpeg|dng_jpeg', hdr='not_supported', list_flags='Last')
+2026-08-13 18:56:44,424 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.gimbal_capabilities(gimbal_id=0, model='main', axes='pitch|roll', list_flags='')
+2026-08-13 18:56:44,428 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.antiflicker_capabilities(supported_modes='off|mode_50hz|mode_60hz')
+2026-08-13 18:56:44,429 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - leds.capabilities(supported_capabilities='')
+2026-08-13 18:56:44,429 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - precise_home.capabilities(modes='disabled|standard')
+2026-08-13 18:56:44,430 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - stereo_vision_sensor.capabilities(sensor_id=0, model='fstcam', supported_features='')
+2026-08-13 18:56:44,431 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - piloting_style.capabilities(styles='standard|camera_operated')
+2026-08-13 18:56:44,431 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - user_storage.capabilities(supported_features='format_when_ready_allowed|format_result_evt_supported|format_progress_evt_supported')
+2026-08-13 18:56:44,432 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - dri.capabilities(supported_capabilities='on_off|french_regulation|en4709_002_regulation')
+2026-08-13 18:56:44,433 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mission.capabilities(uid='', name='', desc='', version='', recipient_id=0, target_model_id=0, target_min_version='', target_max_version='', list_flags='First|Last|Empty')
+2026-08-13 18:56:44,433 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.home_type_capabilities(values='takeoff|followee|custom|pilot')
+2026-08-13 18:56:44,434 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - security_edition.capabilities(supported_capabilities='')
+2026-08-13 18:56:44,434 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingSettingsState.MaxAltitudeChanged(current=30.0, min=0.5, max=4000.0)
+2026-08-13 18:56:44,435 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingSettingsState.MaxDistanceChanged(current=100.0, min=10.0, max=4000.0)
+2026-08-13 18:56:44,436 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingSettingsState.NoFlyOverMaxDistanceChanged(shouldNotFlyOver=0)
+2026-08-13 18:56:44,437 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingSettingsState.MaxTiltChanged(current=10.0, min=1.0, max=40.0)
+2026-08-13 18:56:44,438 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SpeedSettingsState.MaxVerticalSpeedChanged(current=1.0, min=0.10000000149011612, max=4.0)
+2026-08-13 18:56:44,438 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SpeedSettingsState.MaxRotationSpeedChanged(current=10.0, min=3.0, max=200.0)
+2026-08-13 18:56:44,518 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SpeedSettingsState.MaxPitchRollRotationSpeedChanged(current=76.7676773071289, min=40.0, max=300.0)
+2026-08-13 18:56:44,518 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingSettingsState.BankedTurnChanged(state=1)
+2026-08-13 18:56:44,519 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SpeedSettingsState.HullProtectionChanged(present=0)
+2026-08-13 18:56:44,519 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSSettingsState.ReturnHomeDelayChanged(delay=1)
+2026-08-13 18:56:44,520 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.delay(delay=1, min=1, max=120)
+2026-08-13 18:56:44,521 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSSettingsState.ReturnHomeMinAltitudeChanged(value=30.0, min=20.0, max=100.0)
+2026-08-13 18:56:44,521 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.min_altitude(current=30.0, min=20.0, max=100.0)
+2026-08-13 18:56:44,521 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.ending_behavior(ending_behavior='landing')
+2026-08-13 18:56:44,522 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.auto_trigger_mode(mode='on')
+2026-08-13 18:56:44,522 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.state(state='unavailable', reason='disabled')
+2026-08-13 18:56:44,523 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingSettingsState.MotionDetection(enabled=1)
+2026-08-13 18:56:44,524 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.takeoff_location(latitude=0.0, longitude=0.0, altitude=0.0, fixed_before_takeoff=0)
+2026-08-13 18:56:44,524 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.preferred_home_type(type='takeoff')
+2026-08-13 18:56:44,525 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.GPSSettingsState.HomeTypeChanged(type='TAKEOFF')
+2026-08-13 18:56:44,525 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.SettingsState.ProductNameChanged(name='ANAFI-H083200')
+2026-08-13 18:56:44,526 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.supported_security_types(types='wpa2')
+2026-08-13 18:56:44,526 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.security_changed(type='wpa2', key='LNYAA7X05TA1', key_type='plain')
+2026-08-13 18:56:44,527 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.ap_channel_changed(type='auto_2_4_ghz', band='2_4_ghz', channel=3)
+2026-08-13 18:56:44,527 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.country_changed(selection_mode='manual', code='US')
+2026-08-13 18:56:44,527 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.environment_changed(environment='outdoor')
+2026-08-13 18:56:44,528 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.supported_countries(countries='AL;DZ;AR;AM;AW;AU;AT;AZ;BH;BD;BB;BY;BE;BZ;BO;BA;BR;BN;BG;KH;CA;CL;CN;CO;CR;HR;CY;CZ;DK;DO;EC;EG;SV;EE;FI;FR;GE;DE;GR;GL;GD;GU;GT;HT;HN;HK;HU;IS;IN;ID;IR;IE;IL;IT;JM;JP;JO;KZ;KE;KP;KR;KU;LV;LB;LI;LT;LU;MO;MK;MY;MT;MX;MC;MA;NP;NL;AN;NZ;NO;OM;PK;PA;PG;PE;PH;PL;PT;PR;QA;RO;RU;SA;SG;SK;SI;ZA;ES;LK;SE;CH;SY;TW;TH;TT;TN;TR;UA;AE;GB;US;PS;UY;UZ;VE;VN;YE;ZW
+')
+2026-08-13 18:56:44,529 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.relative_attitude_bounds(gimbal_id=0, min_yaw=0.0, max_yaw=0.0, min_pitch=-135.0, max_pitch=105.0, min_roll=-38.0, max_roll=38.0, list_flags='')
+2026-08-13 18:56:44,530 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.absolute_attitude_bounds(gimbal_id=0, min_yaw=0.0, max_yaw=0.0, min_pitch=-90.0, max_pitch=90.0, min_roll=0.0, max_roll=0.0, list_flags='')
+2026-08-13 18:56:44,531 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.max_speed(gimbal_id=0, min_bound_yaw=0.0, max_bound_yaw=0.0, current_yaw=0.0, min_bound_pitch=0.0, max_bound_pitch=180.0, current_pitch=10.0, min_bound_roll=0.0, max_bound_roll=180.0, current_roll=10.0, list_flags='')
+2026-08-13 18:56:44,532 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.max_zoom_speed(cam_id=0, min=0.0, max=10.0, current=0.3400000035762787, list_flags='')
+2026-08-13 18:56:44,533 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.zoom_velocity_quality_degradation(cam_id=0, allowed=1, list_flags='')
+2026-08-13 18:56:44,533 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.calibration_state(state='ok', gimbal_id=0, list_flags='')
+2026-08-13 18:56:44,534 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gimbal.offsets(gimbal_id=0, update_state='inactive', min_bound_yaw=0.0, max_bound_yaw=0.0, current_yaw=0.0, min_bound_pitch=-5.0, max_bound_pitch=5.0, current_pitch=0.0, min_bound_roll=-5.0, max_bound_roll=5.0, current_roll=0.0, list_flags='')
+2026-08-13 18:56:44,535 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.autorecord(cam_id=0, state='active', list_flags='')
+2026-08-13 18:56:44,535 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - dri.dri_state(mode='disabled')
+2026-08-13 18:56:44,536 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - rth.ending_hovering_altitude(current=2.683732032775879, min=1.0, max=10.0)
+2026-08-13 18:56:44,536 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.ProductGPSVersionChanged(software='3.01R', hardware='')
+2026-08-13 18:56:44,536 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.SettingsState.AllSettingsChanged()
+2026-08-13 18:56:44,541 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - mission.custom_msg_enable() has been sent to the device
+2026-08-13 18:56:44,552 [INFO] 	olympe.drone.Skycontroller 3 - _on_connected - <olympe.arsdkng.cmd_itf.ConnectedEvent object at 0x750a88576030>
+2026-08-13 18:56:44,553 [INFO] 	olympe.pdraw.Skycontroller 3 - _create_pomp_loop - Creating pomp loop
+2026-08-13 18:56:44,555 [INFO] 	olympe.pdraw.Skycontroller 3 - _create_pomp_loop - Creating pomp loop
+< Drone Connected >
+  drone connect      ok
+2026-08-13 18:56:45,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:56:46,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:56:47,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:56:47,182 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.LinkSignalQuality(value=5)
+2026-08-13 18:56:48,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:56:48,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=55, rx=100, rx_useful=98
+2026-08-13 18:56:49,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:56:50,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:56:51,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-18)
+2026-08-13 18:56:52,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:56:53,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:56:53,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:56:54,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:56:55,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:56:56,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:56:57,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:56:58,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:56:58,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:56:59,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:01,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-14)
+2026-08-13 18:57:02,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:57:03,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:04,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:05,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:57:06,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:07,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:57:08,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:57:08,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:10,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:11,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:57:12,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:57:13,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:57:13,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:14,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:57:15,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:16,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:57:17,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:57:18,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:57:18,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:19,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:20,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:57:21,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:22,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:23,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:57:23,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:26,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:28,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:29,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:32,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:33,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:34,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:35,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:57:36,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:57:37,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:38,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:38,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:40,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:57:41,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:57:42,042 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:57:43,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:43,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:44,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:45,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+INFO:     127.0.0.1:55478 - "GET / HTTP/1.1" 200 OK
+2026-08-13 18:57:47,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:48,026 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-18)
+2026-08-13 18:57:48,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:49,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:57:50,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:57:51,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:52,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:57:53,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-18)
+2026-08-13 18:57:53,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:54,034 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+INFO:     127.0.0.1:37752 - "GET /assets/index-BFhv5Ci8.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37744 - "GET /assets/index-C4oFuIc4.js HTTP/1.1" 200 OK
+2026-08-13 18:57:55,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+INFO:     127.0.0.1:37744 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+2026-08-13 18:57:56,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:57:58,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:57:58,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:57:59,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:00,024 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-18)
+2026-08-13 18:58:02,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:58:03,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:04,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:05,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:05,270 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BatteryStateChanged(percent=51)
+2026-08-13 18:58:07,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:58:08,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:08,566 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:09,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:10,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-18)
+2026-08-13 18:58:11,034 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:12,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:13,027 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:13,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:15,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+INFO:     127.0.0.1:52366 - "WebSocket /api/ws" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:52374 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52376 - "GET /api/actions HTTP/1.1" 200 OK
+2026-08-13 18:58:16,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:58:17,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:18,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:18,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:22,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:23,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:23,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:24,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:25,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:26,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:27,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:28,034 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:58:28,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:29,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:30,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:32,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:58:33,034 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:58:33,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:34,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:36,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:58:37,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:38,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:38,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:40,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:41,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+Using ONNX Runtime CPU
+*************** EP Error ***************
+EP Error 'providers' and 'provider_options' should be the same length if both are given. when using ['CPUExecutionProvider']
+Falling back to ['CPUExecutionProvider'] and retrying.
+****************************************
+Using ONNX Runtime CPU
+*************** EP Error ***************
+EP Error 'providers' and 'provider_options' should be the same length if both are given. when using ['CPUExecutionProvider']
+Falling back to ['CPUExecutionProvider'] and retrying.
+****************************************
+INFO:     127.0.0.1:40206 - "POST /api/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40206 - "GET /api/status HTTP/1.1" 200 OK
+2026-08-13 18:58:42,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:58:43,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:43,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:44,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:58:45,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:46,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:58:47,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:48,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:51,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+INFO:     127.0.0.1:53868 - "WebSocket /api/ws/frames" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:53884 - "GET /api/actions HTTP/1.1" 200 OK
+2026-08-13 18:58:52,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-18)
+2026-08-13 18:58:53,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:58:53,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:55,034 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:58:56,058 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-19)
+2026-08-13 18:58:56,990 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.FlyingStateChanged(state='motor_ramping')
+2026-08-13 18:58:57,146 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.FlightId(flightId='261C6D0076F34D5ECEC4746EA1B8A22B')
+2026-08-13 18:58:57,149 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.RunState.RunIdChanged(runId='C44F8C')
+2026-08-13 18:58:57,149 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:58:57,494 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gauge_fw_updater.status(diag='up_to_date', missing_requirements='usb|drone_state', state='ready_to_prepare')
+2026-08-13 18:58:58,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:58:58,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:58:58,863 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.FlyingStateChanged(state='takingoff')
+2026-08-13 18:58:59,013 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_state(cam_id=0, available='available', state='inactive', start_timestamp=0, list_flags='')
+2026-08-13 18:58:59,164 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.MediaRecordState.VideoStateChangedV2(state='stopped', error='ok')
+2026-08-13 18:58:59,164 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_progress(cam_id=0, result='started', media_id='', list_flags='')
+2026-08-13 18:58:59,165 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_state(cam_id=0, available='available', state='active', start_timestamp=1786661937222, list_flags='')
+2026-08-13 18:58:59,165 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.MediaRecordState.VideoStateChangedV2(state='started', error='ok')
+2026-08-13 18:58:59,165 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.VibrationLevelChanged(state='warning')
+2026-08-13 18:58:59,314 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.HoveringWarning(no_gps_too_dark=0, no_gps_too_high=0)
+2026-08-13 18:58:59,863 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='look_at', missing_requirements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:00,014 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='geographic', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:00,015 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='relative', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:00,016 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='leash', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:00,164 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-17)
+2026-08-13 18:59:00,357 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.FlyingStateChanged(state='hovering')
+2026-08-13 18:59:01,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:59:02,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 18:59:03,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:03,567 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:04,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:59:05,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:07,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:59:07,288 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BatteryStateChanged(percent=50)
+2026-08-13 18:59:08,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:59:08,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:09,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 18:59:09,247 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.VibrationLevelChanged(state='ok')
+2026-08-13 18:59:10,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:59:11,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 18:59:12,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:13,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:13,567 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:14,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:59:16,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 18:59:17,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:17,296 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BatteryStateChanged(percent=49)
+2026-08-13 18:59:18,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:18,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:20,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 18:59:21,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:59:22,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:59:23,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:23,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:24,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:59:25,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 18:59:26,028 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 18:59:27,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+INFO:     127.0.0.1:58074 - "POST /api/drone/land HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:58074 - "GET /api/status HTTP/1.1" 200 OK
+2026-08-13 18:59:28,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 18:59:28,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:29,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 18:59:29,299 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BatteryStateChanged(percent=48)
+2026-08-13 18:59:30,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:30,428 [INFO] 	olympe.media - _websocket_event_reader - media_event(name=media_created, media_id=10100208)
+2026-08-13 18:59:30,433 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - mediastore.counters(video_media_count=130, photo_media_count=350, video_resource_count=130, photo_resource_count=350)
+2026-08-13 18:59:30,584 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_progress(cam_id=0, result='stopped_no_storage_space', media_id='10100208', list_flags='')
+2026-08-13 18:59:30,735 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - camera.recording_state(cam_id=0, available='available', state='inactive', start_timestamp=1786661937222, list_flags='')
+2026-08-13 18:59:30,736 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.MediaRecordState.VideoStateChangedV2(state='stopped', error='ok')
+2026-08-13 18:59:31,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 18:59:32,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:59:33,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 18:59:33,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:34,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:35,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 18:59:35,378 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - ardrone3.Piloting.CancelMoveBy() has been sent to the device
+------ CANCEL : MOVEBY ------
+2026-08-13 18:59:35,389 [INFO] 	olympe.drone.Skycontroller 3 - _send_command_impl - ardrone3.Piloting.Landing() has been sent to the device
+2026-08-13 18:59:35,548 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.FlyingStateChanged(state='landing')
+------ LAND ------
+INFO:     127.0.0.1:35030 - "POST /api/drone/emergency HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35030 - "GET /api/status HTTP/1.1" 200 OK
+2026-08-13 18:59:35,699 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.state(mode='none', behavior='idle', animation='none', animation_available='')
+2026-08-13 18:59:36,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 18:59:37,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:38,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:59:38,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=50, rx=100, rx_useful=100
+2026-08-13 18:59:39,022 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.MotorFlightsStatusChanged(nbFlights=431, lastFlightDuration=42, totalFlightDuration=64873)
+2026-08-13 18:59:39,173 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.SettingsState.MotorErrorLastErrorChanged(motorError='noError')
+2026-08-13 18:59:39,324 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 18:59:39,326 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='look_at', missing_requirements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:39,326 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='geographic', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:39,327 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='relative', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:39,327 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.mode_info(mode='leash', missing_requirements='target_barometer_ok|drone_far_enough|drone_high_enough|target_good_speed|drone_close_enough', improvements='drone_calibrated|drone_gps_good_accuracy|target_gps_good_accuracy|target_barometer_ok|drone_far_enough|drone_high_enough|image_detection|target_good_speed|drone_close_enough', list_flags='')
+2026-08-13 18:59:41,225 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.FlyingStateChanged(state='landed')
+2026-08-13 18:59:41,376 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.MotionState(state='steady')
+2026-08-13 18:59:41,376 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.FlightId(flightId='')
+2026-08-13 18:59:41,377 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - follow_me.state(mode='none', behavior='idle', animation='none', animation_available='')
+2026-08-13 18:59:41,527 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - gauge_fw_updater.status(diag='up_to_date', missing_requirements='usb', state='ready_to_prepare')
+2026-08-13 18:59:42,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:43,240 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - ardrone3.PilotingState.HoveringWarning(no_gps_too_dark=1, no_gps_too_high=0)
+2026-08-13 18:59:43,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:44,035 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:45,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 18:59:46,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 18:59:47,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:47,304 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - common.CommonState.BatteryStateChanged(percent=47)
+2026-08-13 18:59:48,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 18:59:48,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+2026-08-13 18:59:53,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 18:59:53,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 18:59:54,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 18:59:56,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 18:59:57,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 18:59:58,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 18:59:58,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:00,029 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-24)
+2026-08-13 19:00:01,036 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 19:00:02,036 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 19:00:03,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:03,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:04,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 19:00:06,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 19:00:07,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 19:00:08,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 19:00:08,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:09,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:11,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 19:00:12,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 19:00:13,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 19:00:13,565 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:14,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:15,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-25)
+2026-08-13 19:00:16,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 19:00:17,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:18,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 19:00:18,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:19,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:20,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-28)
+2026-08-13 19:00:22,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:23,566 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:24,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:25,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:26,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:27,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:28,033 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 19:00:28,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:30,032 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:33,034 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 19:00:33,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:34,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-27)
+2026-08-13 19:00:35,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:36,038 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-29)
+2026-08-13 19:00:37,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-23)
+2026-08-13 19:00:38,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-29)
+2026-08-13 19:00:38,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:39,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-26)
+2026-08-13 19:00:40,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-22)
+2026-08-13 19:00:41,031 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-20)
+2026-08-13 19:00:42,030 [INFO] 	olympe.drone.Skycontroller 3 - _recv_cmd_cb - wifi.rssi_changed(rssi=-21)
+2026-08-13 19:00:43,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=100, rx_useful=100
+2026-08-13 19:00:48,564 [INFO] 	olympe.drone.Skycontroller 3 - _link_quality_cb - Link quality: tx=-1, rx=-1, rx_useful=-1
+2026-08-13 19:00:50,184 [ERROR] 	ulog - arsdk - net Too many ping failures
+2026-08-13 19:00:50,184 [INFO] 	olympe.drone.Skycontroller 3 - _link_status_cb - Link status: 0
+2026-08-13 19:00:50,185 [INFO] 	olympe.pdraw.Skycontroller 3 - _destroy_pomp_loop - Pomp loop has been destroyed: Thread-5
+2026-08-13 19:00:50,186 [INFO] 	olympe.pdraw.Skycontroller 3 - _destroy_pomp_loop - Pomp loop has been destroyed: Thread-4
+2026-08-13 19:00:50,213 [INFO] 	olympe.drone.Skycontroller 3 - _disconnected_cb - Disconnected from device: Skycontroller 3
+2026-08-13 19:00:50,216 [INFO] 	olympe.drone.Skycontroller 3 - _on_device_removed - <olympe.arsdkng.cmd_itf.DisconnectedEvent object at 0x750a8db2ffb0>
+2026-08-13 19:00:50,219 [INFO] 	olympe.media - _websocket_event_reader - websocket closed
+2026-08-13 19:00:50,223 [INFO] 	olympe.drone.Skycontroller 3 - _on_device_removed - <olympe.arsdkng.cmd_itf.DisconnectedEvent object at 0x750a88131a30>
+INFO:     127.0.0.1:33200 - "POST /api/drone/rth HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:33200 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33200 - "POST /api/drone/rth HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:33200 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36708 - "POST /api/drone/arm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36708 - "GET /api/status HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/drone.py", line 268, in _piloting
+    getattr(self._drone.piloting, method)()
+  File "/root/.venvs/backpack-gesture/lib/python3.12/site-packages/SoftwarePilot/AnafiPiloting.py", line 76, in takeoff
+    assert self.drone(TakeOff() >> FlyingStateChanged(state = "hovering", _timeout=5)).wait().success()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+INFO:     127.0.0.1:36708 - "POST /api/drone/takeoff HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:36708 - "GET /api/status HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/drone.py", line 268, in _piloting
+    getattr(self._drone.piloting, method)()
+  File "/root/.venvs/backpack-gesture/lib/python3.12/site-packages/SoftwarePilot/AnafiPiloting.py", line 76, in takeoff
+    assert self.drone(TakeOff() >> FlyingStateChanged(state = "hovering", _timeout=5)).wait().success()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+INFO:     127.0.0.1:38552 - "POST /api/drone/takeoff HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:38552 - "GET /api/status HTTP/1.1" 200 OK
+------ MOVEBY ------
+------ x : 0 ------
+------ Y : 1.0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+------ MOVEBY ------
+------ x : 0 ------
+------ Y : 1.0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+------ MOVEBY ------
+------ x : -1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+------ MOVEBY ------
+------ x : -1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+------ MOVEBY ------
+------ x : 0 ------
+------ Y : -1.0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+------ MOVEBY ------
+------ x : 0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 3.14159 ------
+------ MOVEBY ------
+------ x : 1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+------ MOVEBY ------
+------ x : 1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+------ MOVEBY ------
+------ x : -1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/drone.py", line 268, in _piloting
+    getattr(self._drone.piloting, method)()
+  File "/root/.venvs/backpack-gesture/lib/python3.12/site-packages/SoftwarePilot/AnafiPiloting.py", line 91, in land
+    assert self.drone(Landing()).wait().success()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+INFO:     127.0.0.1:48752 - "POST /api/drone/land HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:48752 - "GET /api/status HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/drone.py", line 268, in _piloting
+    getattr(self._drone.piloting, method)()
+  File "/root/.venvs/backpack-gesture/lib/python3.12/site-packages/SoftwarePilot/AnafiPiloting.py", line 76, in takeoff
+    assert self.drone(TakeOff() >> FlyingStateChanged(state = "hovering", _timeout=5)).wait().success()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+INFO:     127.0.0.1:48752 - "POST /api/drone/takeoff HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:48752 - "GET /api/status HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+------ MOVEBY ------
+------ x : 0 ------
+------ Y : 1.0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+------ MOVEBY ------
+------ x : -1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/drone.py", line 268, in _piloting
+    getattr(self._drone.piloting, method)()
+  File "/root/.venvs/backpack-gesture/lib/python3.12/site-packages/SoftwarePilot/AnafiPiloting.py", line 91, in land
+    assert self.drone(Landing()).wait().success()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+INFO:     127.0.0.1:48982 - "POST /api/drone/land HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:48982 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48982 - "POST /api/drone/disarm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48982 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60810 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:60810 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60810 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:60810 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/arm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44348 - "POST /api/drone/emergency HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:44348 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43640 - "POST /api/stop HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43640 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56344 - "POST /api/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56344 - "GET /api/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56356 - "WebSocket /api/ws/frames" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:56344 - "GET /api/actions HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+INFO:     127.0.0.1:59960 - "POST /api/drone/arm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59960 - "GET /api/status HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 155, in update
+    self.tracks[trk_ind]["tracker"].update(dets[det_ind, :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+------ MOVEBY ------
+------ x : -1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
+Traceback (most recent call last):
+  File "/home/icicle/Desktop/Backpack-main/server/main.py", line 341, in process_latest
+    result = await loop.run_in_executor(_inference_pool, _engine.feed, frame)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/gesture_engine.py", line 195, in feed
+    bboxes, ids, label_indices = self._detector(frame)
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/server/detector.py", line 76, in __call__
+    bboxes, ids, labels = self._controller(frame)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 219, in __call__
+    new_bboxes, labels = self.update(dets=bboxes, labels=labels)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/main_controller.py", line 131, in update
+    self.tracks[m[1]]["tracker"].update(dets[m[0], :])
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanboxtracker.py", line 134, in update
+    self.kf.update(convert_bbox_to_z(bbox))
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 479, in update
+    self.unfreeze()
+  File "/home/icicle/Desktop/Backpack-main/high_school_io_2025/dynamic_gestures/ocsort/kalmanfilter.py", line 420, in unfreeze
+    r = w / float(h)
+            ^^^^^^^^
+TypeError: only 0-dimensional arrays can be converted to Python scalars
+------ MOVEBY ------
+------ x : -1.0 ------
+------ Y : 0 ------
+------ Z : 0 ------
+------ ANGLE : 0 ------
