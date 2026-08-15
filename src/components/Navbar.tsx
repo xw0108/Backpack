@@ -14,9 +14,9 @@ interface NavbarProps {
 export default function Navbar({ currentPage, onNavigate, currentUser, onLogout }: NavbarProps) {
   const navItems = [
     { id: 'home', label: 'Home', subtitle: 'Camp Portal' },
-    { id: 'control', label: 'Control Center', subtitle: 'Deployment Status' },
-    { id: 'simulator', label: 'Camp Simulator', subtitle: 'Live Site Twin' },
-    { id: 'insights', label: 'Camp Insight', subtitle: 'Research Hub' },
+    { id: 'manage', label: 'Drone Manager', subtitle: 'Unit & Camera' },
+    { id: 'control', label: 'Gesture Control', subtitle: 'Live Flight' },
+    { id: 'insights', label: 'Insight', subtitle: 'Preview' },
   ];
 
   return (
@@ -64,7 +64,7 @@ export default function Navbar({ currentPage, onNavigate, currentUser, onLogout 
             <div className="hidden lg:flex flex-col text-right">
               <span className="text-xs font-bold text-stone-800">{currentUser.username}</span>
               <span className="text-[9px] font-mono text-emerald-600 font-bold uppercase tracking-wider">
-                {currentUser.backpacks.length} Backpacks
+                {currentUser.droneSerial}
               </span>
             </div>
             

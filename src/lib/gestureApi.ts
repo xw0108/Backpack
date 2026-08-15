@@ -56,6 +56,10 @@ export interface DroneStatus {
   via_skycontroller: boolean;
   /** 'landed' | 'hovering' | 'flying' | … straight from the aircraft. */
   flying_state: string | null;
+  /** [lat, lon, alt] once the aircraft has a GPS fix. */
+  gps: number[] | null;
+  /** The onboard camera is reachable — not yet driven by any UI. */
+  has_camera: boolean;
   last_error: string | null;
   last_command: {
     component: string;

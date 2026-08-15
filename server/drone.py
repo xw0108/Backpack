@@ -406,6 +406,32 @@ class DroneController:
                 return False, err
             return True, None
 
+    # ── onboard camera ───────────────────────────────────────────────────────
+    @property
+    def camera(self):
+        """
+        The ANAFI's own camera, or None when not connected / in test mode.
+
+        Nothing in the web UI drives this yet — it is exposed so the next stage
+        does not have to re-derive what is available.  SoftwarePilot already
+        wraps the whole surface:
+
+            camera.media.take_photo()
+            camera.media.download_last_media(name, path)   -> AnafiMedia/
+            camera.media.start_recording() / stop_recording()
+            camera.media.setup_stream(yuv_frame_cb=...) / start_stream()
+            camera.controls.set_orientation(yaw, pitch, roll)
+            camera.controls.set_zoom(target)
+
+        setup_stream's yuv_frame_cb hands over decoded frames one at a time,
+        which is the same shape camera_source.py already feeds the MJPEG
+        endpoint — that is the seam to reuse for a drone-eye view in the page.
+        """
+        with self._lock:
+            if self.mode == "test" or self._drone is None:
+                return None
+            return getattr(self._drone, "camera", None)
+
     # ── introspection ────────────────────────────────────────────────────────
     def coordinates(self) -> Optional[list]:
         with self._lock:
@@ -430,6 +456,11 @@ class DroneController:
                 "piloting_source": self.piloting_source(),
                 "via_skycontroller": self._via_skycontroller,
                 "flying_state": flying_state,
+                # [lat, lon, alt] once the aircraft has a GPS fix, else None.
+                # The manager page renders this next to the engine's tracked
+                # displacement so an operator can tell the two apart.
+                "gps": self.coordinates(),
+                "has_camera": self.camera is not None,
                 "last_error": self.last_error,
                 "last_command": self.last_command,
             }
